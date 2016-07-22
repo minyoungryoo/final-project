@@ -1,0 +1,18 @@
+<% if user_signed_in? %>
+	<h2>Welcome <%= current_user.name %>!</h2>
+
+
+	<h3>What would you like to do?</h3>
+
+	
+		<button type="button"></button>
+
+
+
+	<%= link_to 'Log out', destroy_user_session_path, method: 'delete' %>
+
+<% else %>
+	<h2>Nobody logged in</h2>
+<% end %>
+
+
