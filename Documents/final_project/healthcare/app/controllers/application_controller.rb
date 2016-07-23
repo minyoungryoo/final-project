@@ -6,6 +6,21 @@ class ApplicationController < ActionController::Base
   	devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
   end
 
+  def authorize_user
+  	unless current_user
+  		flash[:message] = 'Please log in or register to access this page'
+  		redirect_to new_user_session_path
+  	end
+  	
+  end
+
+  def admin_only
+  	unless current_user && current_user.role == "admin"
+  		flash[:access_denied] = "Access denied. You must be admin to see this page."
+  		redirect_to root_path
+  	end
+  	
+  end
 
   private
   def after_sign_in_path_for(resource)

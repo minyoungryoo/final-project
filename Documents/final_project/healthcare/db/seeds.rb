@@ -9,5 +9,11 @@
 
 mickey = User.create(name: "Mickey Mouse", email: "mickey@disney.com", password: "mickey", password_confirmation: "mickey")
 minnie = User.create(name: "Minnie Mouse", email: "minnie@disney.com", password: "minnie", password_confirmation: "minnie")
-goofy = User.create(name: "Goofy", email: "goofy@disney.com", password: "goofy", password_confirmation: "goofy") 
+goofy = User.create(name: "Goofy", email: "goofy@disney.com", password: "goofypw", password_confirmation: "goofypw") 
+disneyland = User.create(name: "Disneyland", email: "dlandadmin@disney.com", password: "adminpw", 
+	password_confirmation: "adminpw", role: "admin")
+
+
+
+
 

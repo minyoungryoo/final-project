@@ -1,15 +1,25 @@
 <% if user_signed_in? %>
-	<h2>Welcome <%= current_user.name %>!</h2>
+	<h2>My Page for <%= current_user.name %></h2>
 
 
-	<h3>What would you like to do?</h3>
+	<p>What would you like to do?</p>
 
+	<% if current_user.role == 'admin' %>
+	<div>
+	<%= link_to 'Upload files', upload_path %>
+	</div>
 	
-		<button type="button"></button>
+	<div>
+	<%= link_to 'View users', '/users'%>
+	</div>
 
+	<% else %>
+	<%= link_to 'Check my Health Record','/'%>
+	<% end %>
 
-
+	<div>
 	<%= link_to 'Log out', destroy_user_session_path, method: 'delete' %>
+	</div>    
 
 <% else %>
 	<h2>Nobody logged in</h2>
