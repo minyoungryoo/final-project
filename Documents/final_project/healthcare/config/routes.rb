@@ -12,12 +12,12 @@ Rails.application.routes.draw do
 
 	get '/users/:id/profile', to: 'users#profile'
 
-	get '/files', to: 'files#index'
+	# get '/api/files', to: 'files#index'
 
-	post '/files', to: 'files#create'
+	post '/api/files', to: 'files#create'
 
 	# , as: :files_root
-	get '/files/show', to: 'files#show'
+	get '/files', to: 'files_view#show'
 
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

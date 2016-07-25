@@ -2,7 +2,7 @@
 
 <%= flash[:notice] %>
 
-<%= form_tag "/files", multipart: true do %>
+<%= form_tag "/api/files", multipart: true do %>
   <%= file_field_tag :csv_file %>
   <%= submit_tag "Submit" %>
 <% end %>

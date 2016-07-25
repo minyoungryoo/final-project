@@ -42,6 +42,8 @@ GEM
     bcrypt (3.1.11)
     builder (3.2.2)
     byebug (9.0.5)
+    chartjs-ror (3.0.2)
+      rails (>= 3.1)
     concurrent-ruby (1.0.2)
     debug_inspector (0.0.2)
     devise (4.2.0)
@@ -161,6 +163,7 @@ PLATFORMS
 
 DEPENDENCIES
   byebug
+  chartjs-ror
   devise
   jbuilder (~> 2.5)
   jquery-rails

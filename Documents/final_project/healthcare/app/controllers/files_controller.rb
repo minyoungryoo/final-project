@@ -1,13 +1,17 @@
 require 'csv'
 
 class FilesController < ApplicationController
-	def index
-		render 'index'
-	end
+	# def index
+	# 	redirect_to '/files'
+	# end
 
 	def create
 		array = CSV.read(params[:csv_file].path)
 
-		puts array
+		result = FilesAnalysis.new.doStuff(array)
+
+		render json: result
+		# redirect_to "/files"
 	end
+
 end
