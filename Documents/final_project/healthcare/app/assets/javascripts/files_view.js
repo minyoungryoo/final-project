@@ -1,18 +1,25 @@
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
 
-$(document).ready (function() {
+$(document).on("turbolinks:load", function() {
 
-	$.ajax({
-			type: "POST",
-			url: '/api/files',
+	if ($('#myChart').length > 0) {
+		var file_id = $("#myChart").data("id");
+
+		$.ajax({
+			type: "GET",
+			url: `/api/files/${file_id}`,
 			success: visualize_data
-		})
+		});
+	}
+
+
 
 	function visualize_data(response){
 		console.log("Lalala")
 		console.log(response)
-	}
+		console.log(response[17])
+		// console.log(<%= FilesAnalysis.new.doStuff(response) %>)
 
 
 	var ctx = document.getElementById("myChart");
@@ -53,4 +60,5 @@ $(document).ready (function() {
 	    }
 	});
 
+	}
 });

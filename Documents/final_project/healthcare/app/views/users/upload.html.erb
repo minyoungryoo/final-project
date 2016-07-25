@@ -1,8 +1,18 @@
 <h1>Upload your file</h1>
 
 <%= flash[:notice] %>
+<%= flash[:alert] %>
 
-<%= form_tag "/api/files", multipart: true do %>
-  <%= file_field_tag :csv_file %>
-  <%= submit_tag "Submit" %>
+<% if @file && @file.errors.any? %>
+	<ul>
+		<% @file.errors.full_messages do |error_message| %>
+			<li> <%= error_message %> </li>
+		<% end %>
+	</ul>
+<% end %>
+
+<%= form_for :process_file, url: "/api/files", multipart: true do |f| %>
+  <%= f.file_field :csv_file %>
+  <!-- name="process_file[csv_file]" -->
+  <%= f.button "Submit", :class => 'file_button' %>
 <% end %>

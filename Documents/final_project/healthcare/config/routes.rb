@@ -17,7 +17,9 @@ Rails.application.routes.draw do
 	post '/api/files', to: 'files#create'
 
 	# , as: :files_root
-	get '/files', to: 'files_view#show'
+	get '/api/files/:id', to: 'files#show'
+
+	get '/files/:id', to: 'files_view#show'
 
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
