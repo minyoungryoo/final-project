@@ -17,14 +17,13 @@ $(document).on("turbolinks:load", function() {
 		var content = "";
 
 		for(var i=0; i<response[1].length; i++){
-			content += `<input type="checkbox" class="searchType" name=${response[1][i]} value=${i}>${response[1][i]}`;
+			content += `<input type="checkbox" class="searchType" name=${response[1][i]} id=${i}>${response[1][i]}`;
 		};
 
 		$('.check_list').html(content)
 	}	
 
-		$('.searchType').click(function() {
-			console.log("lalala")
+		$('.check_list').click(function() {
 			var file_id = $("#myChart").data("id");
 
 			$.ajax({
@@ -37,25 +36,31 @@ $(document).on("turbolinks:load", function() {
 	}
 	
 
+		var data_arr = [];
+		var response_label = [];
 	function visualize_data(response){
-		console.log("Lalala")
 		console.log(response[1])
 		console.log(response[1].length)
 
-		function checkbox_check() {
-			var response_label = [];
-	        if (document.getElementsByClassName('check_list').checked) {
-				var num = document.getElementsByClassName("check_list")[0].value;
-	            response_label.push(response[1][num]);
-	        }; 
-	    }
+		
 
+	        // var num = document.getElementsByClassName("check_list")[3];
 
-		var data_arr = [];
-		for (var i=0; i<response_label.length; i++) {
+            response_label.push(response[1][3]);
+	    
 		    data_arr.push(Math.round(Math.random() * response_label.length))
-		}
 
+
+   //      if (document.getElementsByClassName('searchType').checked) {
+			// var num = document.getElementsByClassName("searchType")[0].value;
+   //          response_label.push(response[1][num]);
+   //      }; 
+		// for (var i=0; i<response_label.length; i++) {
+		//     data_arr.push(Math.round(Math.random() * response_label.length))
+		// }
+
+		console.log(data_arr);
+		console.log(response_label);
 
 
 		var ctx = document.getElementById("myChart");
@@ -98,3 +103,5 @@ $(document).on("turbolinks:load", function() {
 
 	}
 });
+
+
