@@ -22,17 +22,6 @@ class FilesAnalysis < ApplicationRecord
 			p row
 		end
 
-		# attribute_array = ['Temperature']
-		# training_array = [
-		#   [36.6, 'healthy'],
-		#   [37, 'sick'],
-		#   [38, 'sick'],
-		#   [36.7, 'healthy'],
-		#   [40, 'sick'],
-		#   [50, 'really sick'],
-		# ]
-
-
 		dec_tree = DecisionTree::ID3Tree.new(attribute_array, training_array, "sick", :continuous)
 		dec_tree.train
 
@@ -43,9 +32,6 @@ class FilesAnalysis < ApplicationRecord
 
 		decision = dec_tree.predict(patient_condition)
 
-		# test = [37, 'sick']
-		# decision = dec_tree.predict(test)
-
 		puts "========DECISION==========="
 		puts decision
 		puts "========ACTUAL DECISION==========="
@@ -55,27 +41,31 @@ class FilesAnalysis < ApplicationRecord
 		# # dec_tree.graph("discrete")
 
 
-		# # puts "==================="
-		# # puts decision
-		# # puts "====================="
-
-
 		parameter = { solver_type: Liblinear::L1R_LR  }
 		labels = [1, 2, 3, 4, 3]
+		attribute_labels = training_array.transpose[50]
+		puts "ATTR LAB ++++++++++++++++++++"
+		p attribute_labels
+		puts "++++++ ++++++++++++++++++++"
+
 		training_data = [[-2, -2], [-1, -1], [1, 1], [2, 2], [-2, 3]]
 		bias = 0.5
 		fold = 3
 
-		model = Liblinear.train(parameter, labels, training_data, bias)
+		model = Liblinear.train(parameter, attribute_labels, training_array, bias)
 
-		test_data = [1, 1]
+		# test_data = [1, 1]
 
+		puts "=========PREDICT UINSG LABLINEAR=========="
+		puts Liblinear.predict(model, patient_condition)
+		puts "----------PREDICT USING CROSS VAL------------"
+		puts Liblinear.cross_validation(fold, parameter, attribute_labels, training_array).mean
 		puts "==================="
-		puts Liblinear.predict(model, test_data)
-		puts "----------------------"
-		puts Liblinear.cross_validation(fold, parameter, labels, training_data)
 
-		puts "==================="
+
+
+
+
 
 		# Statsample::Analysis.store(Statsample::Graph::Histogram) do
 		#  hist = histogram(rnorm(3000,0,20))
