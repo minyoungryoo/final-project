@@ -1,8 +1,3 @@
-require 'rubygems'
-require 'decisiontree'
-require 'liblinear'
-require 'statsample'
-
 class FilesAnalysis < ApplicationRecord
 	def doStuff(training_array, desired_condition)
 		# # , patient_condition
@@ -77,11 +72,53 @@ class FilesAnalysis < ApplicationRecord
 		puts "==================="
 
 		# Statsample::Analysis.store(Statsample::Graph::Histogram) do
-		#   histogram(rnorm(3000,0,20))
+		#  hist = histogram(rnorm(3000,0,20))
+ 	# 	 puts "**======================**"
+	 #     puts hist
+		#  puts "**======================**"
 		# end
 
-		# a=(1..100).collect { rand(100)}.to_scale
-		
+		a=(1..100).collect { rand(100)}.to_numeric
+		 mean = a.mean
+			    a.sd
+			         
+			    # Calculate correlation coefficient
+			    b=(1..100).collect { rand(100)}.to_scale
+			    Statsample::Bivariate.pearson(a,b)
+			    # Creates a dataset
+			    ds={"a"=>a,"b"=>b}.to_dataset
+			    
+			    # Creates a new vector based on previous vectors and add it to the dataset 
+			    ds['c']=ds.collect {|r| r['a']*10+r['b']*5+rand(10) }
+
+			    # OLS 
+			    lr=Statsample::Regression.multiple(ds,"c")
+
+
+					puts "******===================******"
+					puts lr.sse
+					puts "******===================******"
+
+		# ss_analysis("Statsample::Bivariate.correlation_matrix") do
+		#   samples=1000
+		#   ds=data_frame(
+		#     'a'=>rnorm(samples), 
+		#     'b'=>rnorm(samples),
+		#     'c'=>rnorm(samples),
+		#     'd'=>rnorm(samples))
+		#   cm=cor(ds) 
+		#  sum = summary(cm)
+
+		# # puts "******===================******"
+		# # puts sum
+		# # puts "******===================******"
+
+		# end
+
+		# Statsample::Analysis.run_batch
+
+
+
 
 	
 		# x=100.times.collect {|i| rand(100)}.to_scale
@@ -92,7 +129,15 @@ class FilesAnalysis < ApplicationRecord
 		# puts sr.r
 		# puts "==================="
 
-
+		# ss_analysis(Statsample::Graph::Boxplot) do 
+		#   n=30
+		#   a=rnorm(n-1,50,10)
+		#   b=rnorm(n, 30,5)
+		#   c=rnorm(n,5,1)
+		#   a.push(2)
+		#   boxplot(:vectors=>[a,b,c], :width=>300, :height=>300, :groups=>%w{first first second}, :minimum=>0)
+		# end
+		# Statsample::Analysis.run # Open svg file on *nix application defined
 
 
 	end

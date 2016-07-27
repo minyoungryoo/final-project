@@ -1,6 +1,8 @@
 source 'https://rubygems.org'
 
-gem 'statsample', '~> 2.0', '>= 2.0.2'
+gem 'rmagick', '~> 2.15', '>= 2.15.2'
+
+gem 'statsample', '~> 1.4', '>= 1.4.3'
 
 gem 'liblinear-ruby'
 

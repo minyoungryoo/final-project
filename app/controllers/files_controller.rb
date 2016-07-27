@@ -1,7 +1,4 @@
 require 'csv'
-require 'rubygems'
-require 'decisiontree'
-# include DecisionTree
 
 class FilesController < ApplicationController
 	# # def index
