@@ -8,10 +8,20 @@
 	<%= link_to 'Check Health Record','/'%>
 	</div>
 
-	<div>
-	<%= link_to 'Log out', destroy_user_session_path, method: 'delete' %>
-	</div>    
+	<% end %>
+
+
+<% elsif current_user %>
+	<p>Choose desired health record</p>
+	<ul>
+	<li><%= link_to 'Stroke',"/users/#{current_user.id}/files/1"%></li>
+	</ul>
+	<p></p>
 
 <% else %>
 	<h2>You don't have permission to view this page</h2>
 <% end %>
+
+	<div>
+	<%= link_to 'Log out', destroy_user_session_path, method: 'delete' %>
+	</div>    

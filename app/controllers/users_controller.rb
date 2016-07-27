@@ -1,7 +1,8 @@
 
 class UsersController < ApplicationController
 	before_action :authenticate_user!, only: :show
-	before_action :authorize_user, only: :index
+	# before_action :authorize_user, only: :index
+	before_action :authorize_user, only: [:index, :upload]
 
 	def home
 		render 'home'
@@ -23,7 +24,6 @@ class UsersController < ApplicationController
 	end
 
 	def upload
-
 		render 'upload'
 	end
 end

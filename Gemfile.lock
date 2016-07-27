@@ -40,6 +40,10 @@ GEM
       tzinfo (~> 1.1)
     arel (7.1.0)
     awesome_print (1.7.0)
+    babel-source (5.8.35)
+    babel-transpiler (0.7.0)
+      babel-source (>= 4.0, < 6)
+      execjs (~> 2.0)
     bcrypt (3.1.11)
     builder (3.2.2)
     byebug (9.0.5)
@@ -104,6 +108,7 @@ GEM
       cocaine (~> 0.5.5)
       mime-types
       mimemagic (~> 0.3.0)
+    pg (0.18.4)
     pkg-config (1.1.7)
     prawn (0.8.4)
       prawn-core (>= 0.8.4, < 0.9)
@@ -172,11 +177,14 @@ GEM
     sprockets (3.7.0)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
+    sprockets-es6 (0.9.0)
+      babel-source (>= 5.8.11)
+      babel-transpiler
+      sprockets (>= 3.0.0)
     sprockets-rails (3.1.1)
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    sqlite3 (1.3.11)
     statsample (1.5.0)
       awesome_print (~> 1.6)
       dirty-memoize (~> 0.0.4)
@@ -222,13 +230,14 @@ DEPENDENCIES
   liblinear-ruby
   listen (~> 3.0.5)
   paperclip (~> 5.0.0)
+  pg
   puma (~> 3.0)
   rails (~> 5.0.0)
   rmagick (~> 2.15, >= 2.15.2)
   sass-rails (~> 5.0)
   spring
   spring-watcher-listen (~> 2.0.0)
-  sqlite3
+  sprockets-es6
   statsample (~> 1.4, >= 1.4.3)
   turbolinks (~> 5)
   tzinfo-data

@@ -19,7 +19,11 @@ Rails.application.routes.draw do
 	# , as: :files_root
 	get '/api/files/:id', to: 'files#show'
 
-	get '/files/:id', to: 'files_view#show'
+	# get '/files/:id', to: 'files_view#show'
+
+	get '/users/:id/files', to: 'users#profile'
+
+	get '/users/:id/files/:files_id', to: 'files_view#show'
 
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

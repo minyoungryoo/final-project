@@ -14,7 +14,7 @@
 	</div>
 
 	<% else %>
-	<%= link_to 'Check my Health Record','/'%>
+	<%= link_to 'Check my Health Record',"/users/#{current_user.id}/files"%>
 	<% end %>
 
 	<div>
