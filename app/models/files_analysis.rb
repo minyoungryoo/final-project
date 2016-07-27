@@ -1,50 +1,56 @@
+require 'Liblinear'
+
 class FilesAnalysis < ApplicationRecord
 	def doStuff(training_array, desired_condition)
 		# # , patient_condition
 		
-		# full_attribute_array = training_array[0]
-		# attribute_array = full_attribute_array[0..49]
+		full_attribute_array = training_array[0]
+		attribute_array = full_attribute_array[0..49]
 
-		# # puts "--------------------"
-		# # puts attribute_array.length
-		# # puts "--------------------"
+		puts "-------------FIRST-------"
+		puts attribute_array
+		puts "--------------------"
 
+		training_array = training_array[1..112]
+		training_array.each do |row|
+			row.map! do |element|
+				element.to_f
+			end
+		end
 
+		training_array.each do |row|
+			p row
+		end
 
-		# training_array = training_array[1..112]
-
-		# # puts "--------------------"
-		# # training_array.each do |row|
-		# # row.each do |col|
-			# 		puts col
-			# 	end
-			# end
-		# # puts "--------------------"
-
-
-		attribute_array = ['Temperature']
-		training_array = [
-		  [36.6, 'healthy'],
-		  [37, 'sick'],
-		  [38, 'sick'],
-		  [36.7, 'healthy'],
-		  [40, 'sick'],
-		  [50, 'really sick'],
-		]
+		# attribute_array = ['Temperature']
+		# training_array = [
+		#   [36.6, 'healthy'],
+		#   [37, 'sick'],
+		#   [38, 'sick'],
+		#   [36.7, 'healthy'],
+		#   [40, 'sick'],
+		#   [50, 'really sick'],
+		# ]
 
 
 		dec_tree = DecisionTree::ID3Tree.new(attribute_array, training_array, "sick", :continuous)
 		dec_tree.train
 
-		# # patient_condition = training_array[4][0..5]
-		# # decision = dec_tree.predict(patient_condition)
+		patient_condition = training_array[4][0..49]
 
-		test = [37, 'sick']
-		decision = dec_tree.predict(test)
+		puts "Patient condition****"
+		p patient_condition
 
-		puts "==================="
+		decision = dec_tree.predict(patient_condition)
+
+		# test = [37, 'sick']
+		# decision = dec_tree.predict(test)
+
+		puts "========DECISION==========="
 		puts decision
-		puts "====================="
+		puts "========ACTUAL DECISION==========="
+		puts training_array[4][50]
+		puts "========+++++++++++++============="
 
 		# # dec_tree.graph("discrete")
 
@@ -79,25 +85,23 @@ class FilesAnalysis < ApplicationRecord
 		# end
 
 		a=(1..100).collect { rand(100)}.to_numeric
-		 mean = a.mean
-			    a.sd
 			         
-			    # Calculate correlation coefficient
-			    b=(1..100).collect { rand(100)}.to_scale
-			    Statsample::Bivariate.pearson(a,b)
-			    # Creates a dataset
-			    ds={"a"=>a,"b"=>b}.to_dataset
-			    
-			    # Creates a new vector based on previous vectors and add it to the dataset 
-			    ds['c']=ds.collect {|r| r['a']*10+r['b']*5+rand(10) }
+	    # Calculate correlation coefficient
+	    b=(1..100).collect { rand(100)}.to_scale
+	    Statsample::Bivariate.pearson(a,b)
+	    # Creates a dataset
+	    ds={"a"=>a,"b"=>b}.to_dataset
+	    
+	    # Creates a new vector based on previous vectors and add it to the dataset 
+	    ds['c']=ds.collect {|r| r['a']*10+r['b']*5+rand(10) }
 
-			    # OLS 
-			    lr=Statsample::Regression.multiple(ds,"c")
+	    # OLS 
+	    lr=Statsample::Regression.multiple(ds,"c")
 
 
-					puts "******===================******"
-					puts lr.sse
-					puts "******===================******"
+		puts "******===================******"
+		puts lr.sse
+		puts "******===================******"
 
 		# ss_analysis("Statsample::Bivariate.correlation_matrix") do
 		#   samples=1000
