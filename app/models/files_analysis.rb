@@ -1,4 +1,4 @@
-require 'Liblinear'
+require 'liblinear'
 
 class FilesAnalysis < ApplicationRecord
 	def doStuff(training_array, desired_condition)
