@@ -19,7 +19,7 @@ Rails.application.routes.draw do
 	# , as: :files_root
 	get '/api/files/:id', to: 'files#show'
 
-	# get '/files/:id', to: 'files_view#show'
+	get '/files/:id', to: 'files_view#show'
 
 	get '/users/:id/files', to: 'users#profile'
 

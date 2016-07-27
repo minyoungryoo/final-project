@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails_12factor'
 
-gem 'sprockets-es6'
+gem 'sprockets-es6', require: 'sprockets/es6'
 
 gem 'rmagick', '~> 2.15', '>= 2.15.2'
 
