@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'decisiontree'
 require 'liblinear'
+require 'statsample'
 
 class FilesAnalysis < ApplicationRecord
 	def doStuff(training_array, desired_condition)
@@ -18,34 +19,37 @@ class FilesAnalysis < ApplicationRecord
 		# training_array = training_array[1..112]
 
 		# # puts "--------------------"
-		# # puts training_array
+		# # training_array.each do |row|
+		# # row.each do |col|
+			# 		puts col
+			# 	end
+			# end
 		# # puts "--------------------"
 
 
-		# attribute_array = ['Temperature']
-		# training_array = [
-		#   [36.6, 'healthy'],
-		#   [37, 'sick'],
-		#   [38, 'sick'],
-		#   [36.7, 'healthy'],
-		#   [40, 'sick'],
-		#   [50, 'really sick'],
-		# ]
+		attribute_array = ['Temperature']
+		training_array = [
+		  [36.6, 'healthy'],
+		  [37, 'sick'],
+		  [38, 'sick'],
+		  [36.7, 'healthy'],
+		  [40, 'sick'],
+		  [50, 'really sick'],
+		]
 
 
-		# dec_tree = DecisionTree::ID3Tree.new(attribute_array, training_array, "sick", :continuous)
-		# dec_tree.train
-
-		# # puts "==================="
-		# # puts dec_tree
-		# # puts "====================="
-
+		dec_tree = DecisionTree::ID3Tree.new(attribute_array, training_array, "sick", :continuous)
+		dec_tree.train
 
 		# # patient_condition = training_array[4][0..5]
 		# # decision = dec_tree.predict(patient_condition)
 
-		# test = [37, 'sick']
-		# decision = dec_tree.predict(test)
+		test = [37, 'sick']
+		decision = dec_tree.predict(test)
+
+		puts "==================="
+		puts decision
+		puts "====================="
 
 		# # dec_tree.graph("discrete")
 
@@ -71,6 +75,23 @@ class FilesAnalysis < ApplicationRecord
 		puts Liblinear.cross_validation(fold, parameter, labels, training_data)
 
 		puts "==================="
+
+		# Statsample::Analysis.store(Statsample::Graph::Histogram) do
+		#   histogram(rnorm(3000,0,20))
+		# end
+
+		# a=(1..100).collect { rand(100)}.to_scale
+		
+
+	
+		# x=100.times.collect {|i| rand(100)}.to_scale
+		# y=100.times.collect {|i| 2+x[i]*2+rand()}.to_scale
+		# sr=Statsample::Regression.simple(x,y)
+
+		# puts "==================="
+		# puts sr.r
+		# puts "==================="
+
 
 
 

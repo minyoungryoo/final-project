@@ -36,12 +36,14 @@ class FilesController < ApplicationController
 		readable_array = JSON.parse(array)
 
 
-		# result = FilesAnalysis.new.doStuff(readable_array, '3')
+		result = FilesAnalysis.new.doStuff(readable_array, '3')
 		puts "========================="
 		puts result
 		puts "========================="
-		render json: array[1]
-		# render json: array
+
+
+		result = readable_array[0]
+		render json: result
 	end
 
 	private

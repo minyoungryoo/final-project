@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'statsample', '~> 2.0', '>= 2.0.2'
+
 gem 'liblinear-ruby'
 
 gem 'decisiontree'

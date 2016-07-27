@@ -14,6 +14,7 @@ $(document).on("turbolinks:load", function() {
 		});
 
 		function initialize_data(response){
+			console.log(response);
 		var content = "";
 
 		for(var i=0; i<response.length; i++){

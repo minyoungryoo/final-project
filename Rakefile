@@ -5,10 +5,10 @@ require_relative 'config/application'
 
 Rails.application.load_tasks
 
-require 'bundler'
-Bundler::GemHelper.install_tasks
+# require 'bundler'
+# Bundler::GemHelper.install_tasks
 
-require 'rspec/core/rake_task'
-RSpec::Core::RakeTask.new
+# require 'rspec/core/rake_task'
+# RSpec::Core::RakeTask.new
 
-task :default => :spec
+# task :default => :spec
