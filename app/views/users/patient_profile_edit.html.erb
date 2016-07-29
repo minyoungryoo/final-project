@@ -1,38 +1,85 @@
 <h2>Patient Profile edit page</h2>
 
-<div class="dropdown">
-  <button class="dropbtn js-dropbtn" data-id="js-dropdown-1">Sex</button>
-  <select class="dropdown-content js-dropdown-1"> Sex
-	  <option value="volvo">Volvo</option>
-	  <option value="saab">Saab</option>
-	  <option value="mercedes">Mercedes</option>
-	  <option value="audi">Audi</option>
-  </select>
-</div>
+<h3>Demographics/Basic Medical Information</h3>
 
-<div class="dropdown">
-  <button class="dropbtn js-dropbtn" data-id="js-dropdown-2">Age</button>
-  <div class="dropdown-content js-dropdown-2">
-    <a href="#" class="js-option" data-attr-name="age" data-value="35-45">35-45</a>
-    <a href="#">Link 5</a>
-    <a href="#">Link 6</a>
+<div class="basic_info">
+  <div class="dropdown">
+    <button class="dropbtn js-dropbtn" data-id="js-dropdown-2">Sex</button>
+    <div class="dropdown-content js-dropdown-2"> 
+      <a href="#" class="js-option" data-attr-name="SEX" data-value="1">Female</a>
+      <a href="#" class="js-option" data-attr-name="SEX" data-value="0">Male</a>
+      <a href="#" class="js-option" data-attr-name="SEX" data-value="-1">N/A</a>
+    </div>
+  </div>
+
+  <div class="dropdown">
+    <button class="dropbtn js-dropbtn" data-id="js-dropdown-3">Age</button>
+    <div class="dropdown-content js-dropdown-3">
+      <a href="#" class="js-option" data-attr-name="AGE" data-value="0"> <20 </a>
+      <a href="#" class="js-option" data-attr-name="AGE" data-value="1"> 21-35 </a>
+      <a href="#" class="js-option" data-attr-name="AGE" data-value="2"> 36-50 </a>
+      <a href="#" class="js-option" data-attr-name="AGE" data-value="3"> 51-65 </a>
+      <a href="#" class="js-option" data-attr-name="AGE" data-value="4"> 66+ </a>
+      <a href="#" class="js-option" data-attr-name="AGE" data-value="-1">N/a</a>
+    </div>
+  </div>
+
+  <div class="dropdown">
+    <button class="dropbtn js-dropbtn" data-id="js-dropdown-5"> Atrial fibrillation </button>
+    <div class="dropdown-content js-dropdown-5">
+      <a href="#" class="js-option" data-attr-name="RATRIAL" data-value="1"> Y </a>
+      <a href="#" class="js-option" data-attr-name="RATRIAL" data-value="0"> N </a>
+      <a href="#" class="js-option" data-attr-name="RATRIAL" data-value="-1"> N/A </a>
+    </div>
+  </div>
+
+  <div class="dropdown">
+    <button class="dropbtn js-dropbtn" data-id="js-dropdown-7"> Systolic Blood Pressure (bpm) </button>
+    <div class="dropdown-content js-dropdown-7">
+      <a href="#" class="js-option" data-attr-name="BP" data-value="0"> >120 </a>
+      <a href="#" class="js-option" data-attr-name="BP" data-value="1"> 121-134 </a>
+      <a href="#" class="js-option" data-attr-name="BP" data-value="2"> 135-148 </a>
+      <a href="#" class="js-option" data-attr-name="BP" data-value="3"> 149-162 </a>
+      <a href="#" class="js-option" data-attr-name="BP" data-value="4"> 163-176 </a>
+      <a href="#" class="js-option" data-attr-name="BP" data-value="5"> 177+ </a>
+      <a href="#" class="js-option" data-attr-name="BP" data-value="-1"> N/A </a>
+    </div>
   </div>
 </div>
 
-<div class="dropdown">
-  <button class="dropbtn js-dropbtn" data-id="js-dropdown-3">Blood Pressure</button>
-  <div class="dropdown-content js-dropdown-3">
-    <a href="#">Link 1</a>
-    <a href="#">Link 2</a>
-    <a href="#">Link 3</a>
+
+
+
+<h3>Medical Conditions</h3>
+
+<div class="med_cond">
+  <div class="dropdown">
+  <button class="dropbtn js-dropbtn" data-id="js-dropdown-1">Conscious state</button>
+  <div class="dropdown-content js-dropdown-1"> 
+    <a href="#" class="js-option" data-attr-name="RC" data-value="2">Fully Alert</a>
+    <a href="#" class="js-option" data-attr-name="RC" data-value="1">Drowsy</a>
+    <a href="#" class="js-option" data-attr-name="RC" data-value="0">Unconscious</a>
+    <a href="#" class="js-option" data-attr-name="RC" data-value="-1">N/A</a>
   </div>
 </div>
 
-<div class="dropdown">
-  <button class="dropbtn js-dropbtn" data-id="js-dropdown-4">Stroke Subtype</button>
-  <div class="dropdown-content js-dropdown-4">
-    <a href="#">Link 1</a>
-    <a href="#">Link 2</a>
-    <a href="#">Link 3</a>
+  <div class="dropdown">
+    <button class="dropbtn js-dropbtn" data-id="js-dropdown-4"> Symptoms noted on waking </button>
+    <div class="dropdown-content js-dropdown-4">
+      <a href="#" class="js-option" data-attr-name="RS" data-value="1"> Y </a>
+      <a href="#" class="js-option" data-attr-name="RS" data-value="0"> N </a>
+      <a href="#" class="js-option" data-attr-name="RS" data-value="-1"> N/A </a>
+    </div>
+  </div>
+
+  <div class="dropdown">
+    <button class="dropbtn js-dropbtn" data-id="js-dropdown-6"> Infarct visible on CT </button>
+    <div class="dropdown-content js-dropdown-6">
+      <a href="#" class="js-option" data-attr-name="RV" data-value="1"> Y </a>
+      <a href="#" class="js-option" data-attr-name="RV" data-value="0"> N </a>
+      <a href="#" class="js-option" data-attr-name="RV" data-value="-1"> N/A </a>
+    </div>
   </div>
 </div>
+
+

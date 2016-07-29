@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem "twitter-bootstrap-rails"
+
 gem 'rails_12factor'
 
 gem 'sprockets-es6', require: 'sprockets/es6'

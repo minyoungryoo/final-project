@@ -6,13 +6,15 @@ $(document).on("turbolinks:load", function () {
 
 function myFunction(event) {
     var className = $(event.currentTarget).data("id");
+    $(".dropdown-content").each(function(){
+      $(this).removeClass("show");
+    });
     $("."+className).toggleClass("show");
 }
 
 // Close the dropdown menu if the user clicks outside of it
 window.onclick = function(event) {
   if (!event.target.matches('.dropbtn')) {
-
     var dropdowns = document.getElementsByClassName("dropdown-content");
     var i;
     for (i = 0; i < dropdowns.length; i++) {
