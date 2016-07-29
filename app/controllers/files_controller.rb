@@ -31,13 +31,9 @@ class FilesController < ApplicationController
 		file = ProcessFile.find(params[:id])
 		array = File.read(file.csv_file.path)
 		readable_array = JSON.parse(array)
+		col_num = params[:num_id]
 
-
-		result = FilesAnalysis.new.doStuff(readable_array, '3')
-		puts "========================="
-		puts result
-		puts "========================="
-
+		result = FilesAnalysis.new.doStuff(readable_array, col_num)
 
 		result = readable_array[0]
 		render json: result

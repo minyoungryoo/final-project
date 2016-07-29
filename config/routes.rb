@@ -25,6 +25,10 @@ Rails.application.routes.draw do
 
 	get '/users/:id/files/:files_id', to: 'files_view#show'
 
+	get '/users/:id/health_record', to: 'users#health_record'
+
+	get '/users/:id/patient_profile/:patient_id', to: 'users#patient_profile_edit'
+
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 

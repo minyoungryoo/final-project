@@ -15,7 +15,6 @@ $(document).on("turbolinks:load", function() {
 		});
 
 		function initialize_data(response){
-			console.log(response);
 		var content = "";
 
 		for(var i=0; i<response.length; i++){
@@ -24,11 +23,14 @@ $(document).on("turbolinks:load", function() {
 
 		$('.check_list').html(content)
 
+		var num_id_col = [];
 		$('.searchType').click(function(event) {
 			var file_id = $("#myChart").data("id");
 			var num_id = $(event.currentTarget).data("id");
+			num_id_col.push(num_id);
 			$.ajax({
 				type: "GET",
+				data: {num_id: num_id_col},
 				url: `/api/files/${file_id}`,
 				success: function(response){
 					visualize_data(response, num_id); 
@@ -48,19 +50,10 @@ $(document).on("turbolinks:load", function() {
 	var theChart;
 
 	function visualize_data(response, num_id){
-		console.log(response);
-		console.log(response.length);
-		console.log(num_id);
 
         response_label.push(response[num_id]);
-    
 	    data_arr.push(Math.round(Math.random() * response_label.length));
-
 	    color_arr.push('rgba(255, 99, 132, 0.2)');
-
-
-		console.log(data_arr);
-		console.log(response_label);
 
 		updateChart();
 	}

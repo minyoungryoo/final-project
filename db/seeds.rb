@@ -12,6 +12,8 @@ minnie = User.create(name: "Minnie Mouse", email: "minnie@disney.com", password:
 goofy = User.create(name: "Goofy", email: "goofy@disney.com", password: "goofypw", password_confirmation: "goofypw") 
 disneyland = User.create(name: "Disneyland", email: "dlandadmin@disney.com", password: "adminpw", 
 	password_confirmation: "adminpw", role: "admin")
+drkatz = User.create(name: "Doctor Katz", email: "drkatz@disney.com", password: "drkatz", 
+	password_confirmation: "drkatz", role: "doctor")
 
 
 

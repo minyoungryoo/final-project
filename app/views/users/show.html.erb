@@ -13,6 +13,15 @@
 	<%= link_to 'View users', '/users'%>
 	</div>
 
+	<% elsif current_user.role == "doctor" %>
+	<div>
+	<%= link_to 'Edit profile',"/users/#{current_user.id}/profile"%>
+	</div>
+
+	<div>	
+	<%= link_to 'View list of patients',"/users"%>
+	</div>
+
 	<% else %>
 	<%= link_to 'Check my Health Record',"/users/#{current_user.id}/files"%>
 	<% end %>

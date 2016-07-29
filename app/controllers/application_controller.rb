@@ -19,7 +19,13 @@ class ApplicationController < ActionController::Base
   		flash[:access_denied] = "Access denied. You must be admin to see this page."
   		redirect_to root_path
   	end
-  	
+  end
+
+  def admin_and_doctor_only
+    unless current_user && (current_user.role == "admin" || current_user.role == "doctor")
+      flash[:access_denied] = "Access denied. You must be an admin or doctor to see this page."
+      redirect_to root_path
+    end
   end
 
   private

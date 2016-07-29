@@ -1,15 +1,9 @@
 <% if current_user.role == "admin" %>
 	<h2>Profile for <%= @user.name %></h2>
 
-
-	<% if current_user.role == 'admin' %>
-
 	<div>
-	<%= link_to 'Check Health Record','/'%>
+	<%= link_to 'Check Health Record',"/users/#{current_user.id}/health_record"%>
 	</div>
-
-	<% end %>
-
 
 <% elsif current_user %>
 	<p>Choose desired health record</p>
