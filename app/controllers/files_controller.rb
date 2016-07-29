@@ -33,6 +33,10 @@ class FilesController < ApplicationController
 		readable_array = JSON.parse(array)
 		col_num = params[:num_id]
 
+		# puts "**************PARAMS*****************"
+		# p col_num
+		# puts "*******************************"
+
 		result = FilesAnalysis.new.doStuff(readable_array, col_num)
 
 		result = readable_array[0]

@@ -16,7 +16,7 @@ gem 'decisiontree'
 
 gem "paperclip", "~> 5.0.0"
 
-gem 'chartjs-ror'
+# gem 'chartjs-ror'
 
 gem 'devise'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

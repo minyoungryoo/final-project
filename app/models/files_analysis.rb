@@ -5,6 +5,10 @@ class FilesAnalysis < ApplicationRecord
 		# # , patient_condition
 		if col_nums != nil
 
+			# puts "@@@@@@@@@@@@@@@@@@@@@@@@@@COLNUMS@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+			# p col_nums
+			# puts "@@@@@@@@@@@@@@@@@@@@@@@@@@COLNUMS@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+
 		full_attribute_array = full_training_array[0]
 		full_attribute_array = full_attribute_array[0..49]
 		outputs_array = 
@@ -17,7 +21,7 @@ class FilesAnalysis < ApplicationRecord
 		full_training_array = full_training_array[1..112]
 		full_training_array.each do |row|
 			row.map! do |element|
-				element.to_f
+				element.to_i #changed from f
 			end
 		end
 

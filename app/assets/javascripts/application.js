@@ -14,5 +14,6 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require twitter/bootstrap
-//= require Chart.bundle.min
+// require Chart.bundle.min
+//= require Chart.min
 //= require_tree .

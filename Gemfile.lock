@@ -47,8 +47,6 @@ GEM
     bcrypt (3.1.11)
     builder (3.2.2)
     byebug (9.0.5)
-    chartjs-ror (3.0.2)
-      rails (>= 3.1)
     clbustos-rtf (0.4.2)
     climate_control (0.0.3)
       activesupport (>= 3.0)
@@ -240,7 +238,6 @@ PLATFORMS
 
 DEPENDENCIES
   byebug
-  chartjs-ror
   decisiontree
   devise
   jbuilder (~> 2.5)
