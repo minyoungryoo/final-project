@@ -30,14 +30,16 @@ $(document).on("turbolinks:load", function() {
 		var ctx = document.getElementById("myPieChart");
 		var myDoughnutChart = new Chart(ctx, {
 		    type: 'doughnut',
-		    data: data
-		    // options: options
+		    data: data,
+		    options: {
+		    	maintainAspectRatio: false
+		    }
 		});
 	};
 
-	if ($('#myChart').length > 0) {
+	if ($('.js-chart-container').length > 0) {
 
-		var file_id = $("#myChart").data("id");
+		var file_id = $(".js-chart-container").data("id");
 
 		$.ajax({
 			type: "GET",
@@ -47,16 +49,20 @@ $(document).on("turbolinks:load", function() {
 
 		function initialize_data(response){
 		var content = "";
+		// var response_label = ["Heparin", "Aspirin", "Varying Dosages of Hep/Asp", "Subcutaneous Heparin", "Antiplatelet Drug", "Intravenous Heparin", "Other Anticoagulants", "Glycerol or manitol", "Steroids", "Calcium Antagonists", "Haemodilution", "Carotid Surgery", "Thrombolysis", "Followup to treatment", "Medication Taken at 6-months Followup"];
 
 		for(var i=0; i<response.length; i++){
 			content += `<input type="checkbox" class="searchType" name=${response[i]} data-id=${i}>${response[i]}`;
 		};
 
+		console.log("CONTENT****************");
+		console.log(content);
+
 		$('.check_list').html(content)
 
 		var num_id_col = [];
 		$('.searchType').click(function(event) {
-			var file_id = $("#myChart").data("id");
+			var file_id = $(".js-chart-container").data("id");
 			var num_id = $(event.currentTarget).data("id");
 			num_id_col.push(num_id);
 			$.ajax({
@@ -89,59 +95,66 @@ $(document).on("turbolinks:load", function() {
 	    color_arr.push('rgba(255, 99, 132, 0.2)');
 	    error_arr.push(rand_num*0.1);
 
-	    console.log(error_arr);
-	    console.log(data_arr);
-
 		updateChart();
 	}
 
 
 	function updateChart () {
-		if (theChart) {
-			theChart.update();
-		}
+		// Recreate the entire chart because BarError sucks and doesn't update
+		var id = $('.js-chart-container').data("id");
+		$('.js-chart-container').html(`<canvas id="myChart" data-id="${id}" width="300" height="200"></canvas>`);
 
-		else {
-			var ctx = document.getElementById("myChart");
-			theChart = new Chart(ctx, {
-			    type: 'bar',
-			    data: {
-			        labels: response_label,
-			        datasets: [{
-			            label: '# of Occurances',
-			            data: data_arr,
-			            error: error_arr,
-			            errorDir : "both",
-			            errorStrokeWidth : 1,
-			            errorCapWidth : 0.75,
-			            // errorColor: "rgba(220, 220, 220, 1)",
-			            backgroundColor: color_arr,
-			            borderColor: color_arr,
-			            borderWidth: 1
-			        }]
-			    },
-			    options: {
-			    	        title: {
-				            display: true,
-				            text: 'Title of this graph'
-					        },
-			        scales: {
-			            yAxes: [{
-			                ticks: {
-			                    beginAtZero:true
-			                }
-			            }]
-			        },
-					onClick: handleClick
-			    }
-			});
-		}
-		
-		function handleClick(evt)
-		{
-		    var activeElement = theChart.getElementAtEvent(evt);
-		    console.log(activeElement);
-		}
+		var ctx = document.getElementById("myChart");
+
+		var randomScalingFactor = function() {
+		    return (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100);
+		};
+
+
+		theChart = new Chart(ctx, {
+            type: 'barError',
+		    data: {
+		        labels: response_label,
+		        datasets: [{
+		            label: '# of Occurances',
+		            data: data_arr,
+		            error: error_arr,
+		            errorDir : "both",
+		            errorStrokeWidth : 1,
+		            errorCapWidth : 0.75,
+		            errorColor: "black",
+		            backgroundColor: color_arr,
+		            borderColor: color_arr,
+		            borderWidth: 1
+		        }]
+		    },
+		    options: {
+		    	        title: {
+			            display: true,
+			            text: 'Title of this graph'
+				        },
+		        scales: {
+		            yAxes: [{
+		                ticks: {
+		                    beginAtZero:true,
+                            max: 7,
+		                    min: 0,
+		                    stepSize: 0.5
+		                }
+		            }]
+		        },
+				onClick: handleClick
+		    }
+		});	
+	}
+
+	function handleClick(evt)
+	{
+	    var activeElement = theChart.getElementAtEvent(evt);
+	    console.log(activeElement[0]._index);
+
+	    // <button type="button" data-toggle="modal" data-target="#myModal"></button>
+
 	}
 });
 
