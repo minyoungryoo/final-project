@@ -3,24 +3,34 @@
 
 
 $(document).on("turbolinks:load", function() {
-		// var basic_num_id_col = [];
+		var attr_arr = [];
+		var index_arr = [];
+		
+		$('.js-form-control').on('change', function(event) {
+			event.preventDefault(); 
+			var patient_id = $("select option:selected").data("id");
+            $.ajax({
+                    url: `/api/files/1`,
+                    type: 'GET',
+                    data: {basic_patient_id: patient_id}
+                });
+
+		});
 		$('.js-option').on('click', function(event) {
 			event.preventDefault(); 
 			var val = $(event.currentTarget).data("value");
 			var attr = $(event.currentTarget).data("attr-name");
 			var index = $(event.currentTarget).data("index");
-			console.log( val);
-			console.log( attr);
-			console.log( index);
-			// basic_num_id_col.push(response_info);
-   //          $.ajax({
-   //                  url: '/users/:id/patient_profile/:patient_id',
-   //                  type: 'GET',
-   //                  data: { basic_num_id: basic_num_id_col },
-   //                  success: function () {
 
-   //                  }
-   //              });
+			attr_arr[parseInt(index)] = attr;
+			index_arr[parseInt(index)] = val;
+
+            $.ajax({
+                    url: `/api/files/1`,
+                    type: 'GET',
+                    data: { basic_attr: attr_arr,
+                     basic_index: index_arr}
+                });
 		});
 });
 

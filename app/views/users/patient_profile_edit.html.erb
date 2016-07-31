@@ -1,5 +1,14 @@
 <h2>Patient Profile edit page</h2>
 
+<div class="form-group">
+  <label for="sel1">Select Patient From List:</label>
+  <select class="js-form-control" id="sel1">
+    <% @all_users.each do |user| %>
+    <option class="js-patient-list" data-id="<%=user.id%>"><%=user.name%></option>
+    <% end %>
+  </select>
+</div>
+
 <h3>Demographics/Basic Medical Information</h3>
 
 <div class="basic_info">
@@ -153,5 +162,7 @@
     </div>
   </div>
 </div>
+
+<h3>****Warning: All fields must be completed in order to work; put Not Applicable (N/A) if needed*******</h3>
 
 

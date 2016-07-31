@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 	before_action :authenticate_user!, only: [:show, :index, :upload]
 	# before_action :authorize_user, only: :index
 	before_action :admin_only, only: [:upload]
-	before_action :admin_and_doctor_only, only: [:index, :upload]
+	before_action :admin_and_doctor_only, only: [:index, :upload, :patient_profile_edit]
 
 	def home
 		render 'home'
@@ -26,5 +26,10 @@ class UsersController < ApplicationController
 
 	def upload
 		render 'upload'
+	end
+
+	def patient_profile_edit
+		@all_users = User.all 
+		render 'patient_profile_edit'
 	end
 end

@@ -37,6 +37,17 @@ class FilesController < ApplicationController
 		# p col_num
 		# puts "*******************************"
 
+		patient_id = params[:basic_patient_id]
+		attr_arr = params[:basic_attr]
+		index_arr = params[:basic_index]
+
+		puts "VERY IMPORTANT STUFF*************************"
+		# p {patient_id, attr_arr, index_arr}
+		p patient_id
+		p attr_arr
+		p index_arr
+		puts "**********************************************"
+
 		result = FilesAnalysis.new.doStuff(readable_array, col_num)
 
 		result = readable_array[0]
