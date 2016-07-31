@@ -19,6 +19,8 @@ Rails.application.routes.draw do
 	# , as: :files_root
 	get '/api/files/:id', to: 'files#show'
 
+	post '/api/files/:id', to: 'files#create_patient_data'
+
 	get '/files/:id', to: 'files_view#show'
 
 	get '/users/:id/files', to: 'users#profile'

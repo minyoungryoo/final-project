@@ -1,9 +1,6 @@
 require 'csv'
 
 class FilesController < ApplicationController
-	# # def index
-	# # 	redirect_to '/files'
-	# # end
 
 	# def create
 	# 	array = CSV.read(params[:csv_file].path)
@@ -27,6 +24,30 @@ class FilesController < ApplicationController
 	  end
 	end
 
+	def create_patient_data
+		patient_id = params[:basic_patient_id]
+		attr_arr = params[:basic_attr]
+		index_arr = params[:basic_index]
+
+		puts "Patient id:"
+		p patient_id
+		if patient_id != nil && (FilesAnalysis.find_by(patient_id: patient_id))
+			session[:data_id] = FilesAnalysis.find_by(patient_id: patient_id).id
+		elsif patient_id != nil
+			patient_data = FilesAnalysis.create(patient_id: patient_id)
+			session[:data_id] = patient_data.id
+		end
+
+		if index_arr && index_arr.length == 15	
+			data_id = session[:data_id]
+			file = FilesAnalysis.find(data_id).update(patient_attr_data: attr_arr, patient_data: index_arr)
+		end
+		puts "PRTY IMPORTANT STUFF*************************"
+		p FilesAnalysis.find(session[:data_id])
+		puts "PRTY IMPORTANT STUFF*************************"
+
+	end
+
 	def show
 		file = ProcessFile.find(params[:id])
 		array = File.read(file.csv_file.path)
@@ -36,17 +57,6 @@ class FilesController < ApplicationController
 		# puts "**************PARAMS*****************"
 		# p col_num
 		# puts "*******************************"
-
-		patient_id = params[:basic_patient_id]
-		attr_arr = params[:basic_attr]
-		index_arr = params[:basic_index]
-
-		puts "VERY IMPORTANT STUFF*************************"
-		# p {patient_id, attr_arr, index_arr}
-		p patient_id
-		p attr_arr
-		p index_arr
-		puts "**********************************************"
 
 		result = FilesAnalysis.new.doStuff(readable_array, col_num)
 

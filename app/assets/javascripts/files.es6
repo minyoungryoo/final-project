@@ -11,7 +11,7 @@ $(document).on("turbolinks:load", function() {
 			var patient_id = $("select option:selected").data("id");
             $.ajax({
                     url: `/api/files/1`,
-                    type: 'GET',
+                    type: 'POST',
                     data: {basic_patient_id: patient_id}
                 });
 
@@ -27,7 +27,7 @@ $(document).on("turbolinks:load", function() {
 
             $.ajax({
                     url: `/api/files/1`,
-                    type: 'GET',
+                    type: 'POST',
                     data: { basic_attr: attr_arr,
                      basic_index: index_arr}
                 });
