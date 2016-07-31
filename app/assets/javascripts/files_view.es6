@@ -137,14 +137,9 @@ $(document).on("turbolinks:load", function() {
 	function updateChart () {
 		// Recreate the entire chart because BarError sucks and doesn't update
 		var id = $('.js-chart-container').data("id");
-		$('.js-chart-container').html(`<canvas id="myChart" data-id="${id}" width="300" height="200"></canvas>`);
+		$('.js-chart-container').html(`<canvas id="myChart" data-id="${id}" width="100" height="100"></canvas>`);
 
 		var ctx = document.getElementById("myChart");
-
-		var randomScalingFactor = function() {
-		    return (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100);
-		};
-
 
 		theChart = new Chart(ctx, {
             type: 'barError',
@@ -166,6 +161,8 @@ $(document).on("turbolinks:load", function() {
 		    options: {
 		    	        title: {
 			            display: true,
+		            	maintainAspectRatio: false,
+			    	 	responsive: true,
 			            text: 'Title of this graph'
 				        },
 		        scales: {
@@ -192,32 +189,48 @@ $(document).on("turbolinks:load", function() {
 	}
 
 	function medical_data() {
+
+		var data_array = [1,2,3];
+		var data_label = ["Side Effect A", "Side Effect B", "Most likely result" ]
+		var color_array = ['rgba(255, 99, 132, 0.2)','rgba(255, 99, 132, 0.2)','rgba(255, 99, 132, 0.2)'];
+		var error_array = [0.1, 0.2, 0.3];
+
+
 		var id = $('.js-med-chart-container').data("id");
 		$('.js-med-chart-container').html(`<canvas id="myMedChart" data-id="${id}" width="300" height="200"></canvas>`);
 
 		var ctx = document.getElementById("myMedChart");
 
-		// var randomScalingFactor = function() {
-		//     return (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100);
-		// };
-
-
 		theChart = new Chart(ctx, {
             type: 'barError',
 		    data: {
-		        labels: response_label,
-		        datasets: [{
-		            label: '# of Occurances',
-		            data: data_arr,
-		            error: error_arr,
-		            errorDir : "both",
-		            errorStrokeWidth : 1,
-		            errorCapWidth : 0.75,
-		            errorColor: "black",
-		            backgroundColor: color_arr,
-		            borderColor: color_arr,
-		            borderWidth: 1
-		        }]
+		        labels: data_label,
+		        datasets: [
+			        {
+			            label: '# of Occurances',
+			            data: data_array,
+			            error: error_array,
+			            errorDir : "both",
+			            errorStrokeWidth : 1,
+			            errorCapWidth : 0.75,
+			            errorColor: "black",
+			            backgroundColor: color_array,
+			            borderColor: color_array,
+			            borderWidth: 1
+			        },
+			        {
+			            label: '# of Occurances',
+			            data: data_array,
+			            error: error_array,
+			            errorDir : "both",
+			            errorStrokeWidth : 1,
+			            errorCapWidth : 0.75,
+			            errorColor: "black",
+			            backgroundColor: color_array,
+			            borderColor: color_array,
+			            borderWidth: 1
+			        }
+		        ]
 		    },
 		    options: {
 		    	        title: {
@@ -225,7 +238,13 @@ $(document).on("turbolinks:load", function() {
 			            text: 'Title of this graph'
 				        },
 		        scales: {
+	        	     xAxes: [
+				                {
+				                    // stacked: true
+				                }
+				            ],
 		            yAxes: [{
+		            	// stacked: true,
 		                ticks: {
 		                    beginAtZero:true,
                             max: 7,
