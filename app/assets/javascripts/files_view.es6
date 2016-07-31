@@ -192,6 +192,8 @@ $(document).on("turbolinks:load", function() {
 
 		var data_array = [1,2,3];
 		// var data_label = ["Major Non-cerebral Hemorrhage", "Other Side Effect", "Recurrent Ischemic Stroke", "Recurrent hemorrhagic Stroke", "Recurrent unknown Stroke", "Pulmonary embolism", "Death", "Indicator for hemorrhagic stroke", "Indicator for ischemic stroke","Indicator for indeterminate stroke","Indicator for hemorrhagic transform","Indicator for pulmonary embolism","Indicator for deep vein thrombosis","Indicator for major non-cerebral bleed","Indicator for any stroke"];
+		// 19-37
+		// 19-25, 30-37
 		var data_label = ["Side Effect A", "Side Effect B", "Most likely result" ]
 		var color_array = ['rgba(255, 99, 132, 0.2)','rgba(255, 99, 132, 0.2)','rgba(255, 99, 132, 0.2)'];
 		var error_array = [0.1, 0.2, 0.3];
