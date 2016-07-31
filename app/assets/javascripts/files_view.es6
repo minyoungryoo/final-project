@@ -88,9 +88,9 @@ $(document).on("turbolinks:load", function() {
 
 		for(var i=0; i<=14; i++){
 			if (i<=2){
-			content += `<input type="checkbox" class="searchType" name=${content_label[i]} data-id=${i+16}>${content_label[i]}`;
+			content += `<input type="checkbox" data-patient-id=${patient_id} class="searchType" name=${content_label[i]} data-id=${i+16}>${content_label[i]}`;
 			}else{
-			content += `<input type="checkbox" class="searchType" name=${content_label[i]} data-id=${i+35}>${content_label[i]}`;
+			content += `<input type="checkbox" data-patient-id=${patient_id} class="searchType" name=${content_label[i]} data-id=${i+35}>${content_label[i]}`;
 			};
 		};
 
@@ -101,9 +101,11 @@ $(document).on("turbolinks:load", function() {
 			var file_id = $(".js-chart-container").data("id");
 			var num_id = $(event.currentTarget).data("id");
 			num_id_col.push(num_id);
+			var patient_id = $(event.currentTarget).data("patient-id");
 			$.ajax({
 				type: "GET",
-				data: {num_id: num_id_col},
+				data: {num_id: num_id_col,
+					patient_id: patient_id},
 				url: `/api/files/${file_id}`,
 				success: function(response){
 					visualize_data(response, num_id); 

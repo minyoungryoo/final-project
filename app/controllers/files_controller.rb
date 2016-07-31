@@ -52,18 +52,20 @@ class FilesController < ApplicationController
 		readable_array = JSON.parse(array)
 		col_num = params[:num_id]
 		patient_id = params[:patient_id]
+		session[:patient_id_file] = patient_id
 
-		attr_arr = FilesAnalysis.find_by(patient_id: patient_id).patient_attr_data
-		data_arr = FilesAnalysis.find_by(patient_id: patient_id).patient_data
 
-		# puts "**************PARAMS*****************"
+		puts "**************PARAMS*****************"
+		p session[:patient_id_file]
+		p attr_arr = FilesAnalysis.find_by(patient_id: session[:patient_id_file]).patient_attr_data
+		p data_arr = FilesAnalysis.find_by(patient_id: session[:patient_id_file]).patient_data
 		# p attr_arr.length
 		# p data_arr
-		# puts "*******************************"
+		puts "*******************************"
 
 		if data_arr.length > 0 
 			# do analysis
-		# result = FilesAnalysis.new.doStuff(readable_array, col_num)
+		result = FilesAnalysis.new.doStuff(readable_array, col_num)
 		end
 		result = FilesAnalysis.new.doStuff(readable_array, col_num)
 

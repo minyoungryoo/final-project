@@ -2,12 +2,16 @@ require 'liblinear'
 
 class FilesAnalysis < ApplicationRecord
 	def doStuff(full_training_array, col_nums)
-		# # , patient_condition
+	# def doStuff(full_training_array, col_nums, attribute_array, patient_condition)
+		# attribute_array
+		# training_array   #>> make with with full_training_array AND col_nums AND [0-13]; use push
+		# patient_condition
+
 		if col_nums != nil
 
-			# puts "@@@@@@@@@@@@@@@@@@@@@@@@@@COLNUMS@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
-			# p col_nums
-			# puts "@@@@@@@@@@@@@@@@@@@@@@@@@@COLNUMS@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+			puts "@@@@@@@@@@@@@@@@@@@@@@@@@@COLNUMS@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+			p col_nums
+			puts "@@@@@@@@@@@@@@@@@@@@@@@@@@COLNUMS@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
 
 		full_attribute_array = full_training_array[0]
 		full_attribute_array = full_attribute_array[0..49]
