@@ -4,6 +4,9 @@ class FilesAnalysis < ApplicationRecord
 	# def doStuff(full_training_array, col_nums)
 	def doStuff(full_training_array, col_nums, basic_attribute_array, basic_patient_condition)
 
+		# 19-25, 30-37, 50
+
+
 		if col_nums != nil
 
 		full_attribute_array = full_training_array[0]
@@ -11,11 +14,8 @@ class FilesAnalysis < ApplicationRecord
 		
 		attribute_array = basic_attribute_array
 			col_nums.each do |i|
-				# attribute_array = attribute_array.push(full_attribute_array[i.to_i])
-				attribute_array = basic_attribute_array.push(full_attribute_array[i.to_i])
+				attribute_array = attribute_array.push(full_attribute_array[i.to_i])
 			end
-
-			
 
 		full_training_array = full_training_array[1..112]
 		full_training_array.each do |row|
@@ -28,27 +28,32 @@ class FilesAnalysis < ApplicationRecord
 		training_array = basic_training_array
 		full_training_array = Matrix[ *full_training_array ]
 			col_nums.each do |i|
-				# training_array = training_array.push(full_training_array.column(i.to_i).to_a)
 				tr_cols = full_training_array.column(i.to_i).to_a
-				training_array = basic_training_array.push(tr_cols)
+				training_array = training_array.push(tr_cols)
 			end
 		#pushing final decision into array:
 		training_array = training_array.push(full_training_array.column(50).to_a)
 		training_array = training_array.transpose
 
 
-		dec_tree = DecisionTree::ID3Tree.new(attribute_array, training_array, "4", :continuous)
+		dec_tree = DecisionTree::ID3Tree.new(attribute_array, training_array, "1", :continuous)
 		dec_tree.train
 
 		patient_condition = basic_patient_condition.map(&:to_i)
-		patient_condition.fill(0, patient_condition.size, 35)
+
+				# 19-25, 30-37, 50
+		# 0-14, 15-18, ... 26-29, 38-49 
+
+		# patient_condition.fill(0, patient_condition.size, 35)
 		col_nums.each do |i|
-			patient_condition[i.to_i] = 1
+			# patient_condition[i.to_i] = 1
+			patient_condition = patient_condition.push(1)
 		end
 
 		# IF WANT TO TEST ***************************
 				# patient_condition = training_array[1].reverse.drop(1).reverse
 		#USE THIS
+
 
 		decision = dec_tree.predict(patient_condition)
 
