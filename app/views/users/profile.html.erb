@@ -8,7 +8,7 @@
 <% elsif current_user %>
 	<p>Choose desired health record</p>
 	<ul>
-	<li><%= link_to 'Stroke',"/users/#{current_user.id}/files/1"%></li>
+	<li><%= link_to 'Stroke',"/users/#{current_user.id}/files/#{@file_id}"%></li>
 	</ul>
 	<p></p>
 

@@ -68,10 +68,12 @@ $(document).on("turbolinks:load", function() {
 	if ($('.js-chart-container').length > 0) {
 
 		var file_id = $(".js-chart-container").data("id");
+		var patient_id = $(".js-chart-container").data("patient-id");
 
 		$.ajax({
 			type: "GET",
 			url: `/api/files/${file_id}`,
+			data: {patient_id: patient_id},
 			success: initialize_data
 		});
 

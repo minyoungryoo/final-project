@@ -5,12 +5,13 @@
 $(document).on("turbolinks:load", function() {
 		var attr_arr = [];
 		var index_arr = [];
+		var file_id = $(".js-chart-container").data("id");
 		
 		$('.js-form-control').on('change', function(event) {
 			event.preventDefault(); 
 			var patient_id = $("select option:selected").data("id");
             $.ajax({
-                    url: `/api/files/1`,
+                    url: `/api/files/${file_id}`,
                     type: 'POST',
                     data: {basic_patient_id: patient_id}
                 });
@@ -26,7 +27,7 @@ $(document).on("turbolinks:load", function() {
 			index_arr[parseInt(index)] = val;
 
             $.ajax({
-                    url: `/api/files/1`,
+                    url: `/api/files/${file_id}`,
                     type: 'POST',
                     data: { basic_attr: attr_arr,
                      basic_index: index_arr}

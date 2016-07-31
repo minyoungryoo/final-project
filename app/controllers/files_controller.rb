@@ -29,8 +29,6 @@ class FilesController < ApplicationController
 		attr_arr = params[:basic_attr]
 		index_arr = params[:basic_index]
 
-		puts "Patient id:"
-		p patient_id
 		if patient_id != nil && (FilesAnalysis.find_by(patient_id: patient_id))
 			session[:data_id] = FilesAnalysis.find_by(patient_id: patient_id).id
 		elsif patient_id != nil
@@ -53,11 +51,20 @@ class FilesController < ApplicationController
 		array = File.read(file.csv_file.path)
 		readable_array = JSON.parse(array)
 		col_num = params[:num_id]
+		patient_id = params[:patient_id]
+
+		attr_arr = FilesAnalysis.find_by(patient_id: patient_id).patient_attr_data
+		data_arr = FilesAnalysis.find_by(patient_id: patient_id).patient_data
 
 		# puts "**************PARAMS*****************"
-		# p col_num
+		# p attr_arr.length
+		# p data_arr
 		# puts "*******************************"
 
+		if data_arr.length > 0 
+			# do analysis
+		# result = FilesAnalysis.new.doStuff(readable_array, col_num)
+		end
 		result = FilesAnalysis.new.doStuff(readable_array, col_num)
 
 		result = readable_array[0]

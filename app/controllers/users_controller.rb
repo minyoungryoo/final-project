@@ -16,6 +16,7 @@ class UsersController < ApplicationController
 
 	def profile
 		@user = User.find(params[:id])
+		@file_id = ProcessFile.find_by(csv_file_file_name: "stroke_data.json").id
 		render 'profile'
 	end
 
