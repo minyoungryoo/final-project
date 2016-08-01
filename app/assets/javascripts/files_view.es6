@@ -27,7 +27,7 @@ $(document).on("turbolinks:load", function() {
 
 		var content_label = ["Varying Dosages of Hep/Asp", "Heparin", "Aspirin", "Followup to treatment", "Subcutaneous Heparin", "Antiplatelet Drug", "Intravenous Heparin", "Other Anticoagulants", "Calcium Antagonists", "Glycerol or manitol", "Steroids", "Haemodilution", "Carotid Surgery", "Thrombolysis", "Medication Taken at 6-months Followup"];
 		var finan_data_arr = [500, 640, 383, 200, 780, 320, 107, 372, 6000, 3000, 10, 68, 15000, 55, 200];
-		var sample_color = ["#BC41EF", "#BB61F3", "#802D7C", "#ECF38B", "#D676D1", "#2F1081", "#AA208A", "#FF6384", "#36A2EB", "#FFCE56", "#BC41EF", "red", "#AA208A", "#AA208A", "#AA208A"];
+		var sample_color = ["#BC41EF", "#BB61F3", "#802D7C", "#ECF38B", "#D676D1", "#2F1081", "#AA208A", "#FF6384", "#36A2EB", "#FFCE56", "#BC41EF", "#FA8072", "#B0C627", "#27AEC6", "#C6A727"];
 
 		response_label.push(content_label[num_index]);
 		data_arr.push(finan_data_arr[num_index]);
@@ -58,7 +58,7 @@ $(document).on("turbolinks:load", function() {
 		    	maintainAspectRatio: false,
 		    	 	responsive: true,
 			    legend: {
-			      display: false
+			      display: true
 			    }
 		    }
 		});
@@ -165,8 +165,6 @@ $(document).on("turbolinks:load", function() {
 					visualize_data(data_cache); 
 					financial_data(num_index, type);
 
-					console.log("data caching");
-					console.log(data_cache);
 				}
 			});
 		 });
@@ -178,7 +176,6 @@ $(document).on("turbolinks:load", function() {
 	
 
 	function visualize_data(response){
-		console.log(response);
 		medical_data(response);
 	}
 
@@ -199,7 +196,6 @@ $(document).on("turbolinks:load", function() {
 			if(arr_lengthB > 0){
 				color_arrayB[arr_lengthB-1] = "#0000FF";
 			}
-
 
 		var data_label = ["Major Non-cerebral Hemorrhage", "Other Side Effect", "Recurrent Ischemic Stroke", "Recurrent hemorrhagic Stroke", "Recurrent unknown Stroke", "Pulmonary embolism", "Death", "Indicator for hemorrhagic stroke", "Indicator for ischemic stroke","Indicator for indeterminate stroke","Indicator for hemorrhagic transform","Indicator for pulmonary embolism","Indicator for deep vein thrombosis","Indicator for major non-cerebral bleed","Indicator for any stroke", "Final Condition"];
 		// 19-25, 30-37
@@ -241,7 +237,7 @@ $(document).on("turbolinks:load", function() {
 		        labels: data_label,
 		        datasets: [
 			        {
-			            label: '# of Occurances',
+			            label: 'Action A',
 			            data: data_arrayA,
 			            error: error_arrayA,
 			            errorDir : "both",
@@ -253,7 +249,7 @@ $(document).on("turbolinks:load", function() {
 			            borderWidth: 1
 			        },
 			        {
-			            label: '# of Occurances',
+			            label: 'Action B',
 			            data: data_arrayB,
 			            error: error_arrayB,
 			            errorDir : "both",

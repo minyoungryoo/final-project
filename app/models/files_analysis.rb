@@ -31,8 +31,6 @@ class FilesAnalysis < ApplicationRecord
 			end
 
 			attribute_array = basic_attribute_array
-				# col_nums.each do |i|
-				# end
 			basic_training_array = full_training_array.transpose[0..14]
 			training_array = basic_training_array
 			full_training_array = Matrix[ *full_training_array ]
@@ -45,10 +43,6 @@ class FilesAnalysis < ApplicationRecord
 				end
 			#pushing final decision into array:
 					# 19-25, 30-37, 50
-
-			# patient_condition.fill(0, patient_condition.size, 35)
-			# col_nums.each do |i|
-			# end
 
 			full_decision_arr = []
 			mean_result_arr = []
