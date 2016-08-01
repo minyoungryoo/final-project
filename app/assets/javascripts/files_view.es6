@@ -165,20 +165,52 @@ $(document).on("turbolinks:load", function() {
 			var error_arrayA = response[0][2];
 			var arr_lengthA = data_arrayA.length;
 			var color_arrayA = Array(arr_lengthA).fill('rgba(255, 99, 132, 0.2)');
+			if(arr_lengthA > 0){
+				color_arrayA[arr_lengthA-1] = "#FF0000";
+			}
 
 			var data_arrayB = response[1][1];
 			var error_arrayB = response[1][2];
 			var arr_lengthB = data_arrayB.length;
-			var color_arrayB = Array(arr_lengthB).fill('blue');
+			var color_arrayB = Array(arr_lengthB).fill('#AFEEEE');
+			if(arr_lengthB > 0){
+				color_arrayB[arr_lengthB-1] = "#0000FF";
+			}
 
 
-		var data_label = ["Major Non-cerebral Hemorrhage", "Other Side Effect", "Recurrent Ischemic Stroke", "Recurrent hemorrhagic Stroke", "Recurrent unknown Stroke", "Pulmonary embolism", "Death", "Indicator for hemorrhagic stroke", "Indicator for ischemic stroke","Indicator for indeterminate stroke","Indicator for hemorrhagic transform","Indicator for pulmonary embolism","Indicator for deep vein thrombosis","Indicator for major non-cerebral bleed","Indicator for any stroke"];
+		var data_label = ["Major Non-cerebral Hemorrhage", "Other Side Effect", "Recurrent Ischemic Stroke", "Recurrent hemorrhagic Stroke", "Recurrent unknown Stroke", "Pulmonary embolism", "Death", "Indicator for hemorrhagic stroke", "Indicator for ischemic stroke","Indicator for indeterminate stroke","Indicator for hemorrhagic transform","Indicator for pulmonary embolism","Indicator for deep vein thrombosis","Indicator for major non-cerebral bleed","Indicator for any stroke", "Final Condition"];
 		// 19-25, 30-37
 
 		var id = $('.js-med-chart-container').data("id");
 		$('.js-med-chart-container').html(`<canvas id="myMedChart" data-id="${id}" width="300" height="200"></canvas>`);
 
 		var ctx = document.getElementById("myMedChart");
+
+		// console.log(data_arrayA);
+		console.log(data_arrayB == 0);
+		// if(typeof data_arrayA == array){
+		// 	var maxA = Math.max.apply(Math, data_arrayA);
+		// }
+		// if(typeof data_arrayB == array){
+		// 	var maxB = Math.max.apply(Math, data_arrayB);
+		// }
+		// if(maxA && maxB){
+		// 	var loc_max_arr = [maxA, maxB];
+		// 	var max_val = Math.max.apply(Math, loc_max_arr);
+		// }else if(maxA){
+		// 	var max_val = maxA;
+		// }else if(maxB){
+		// 	var max_val = maxB;
+		// }else{
+		// 	var max_val = 4;
+		// }
+		var max_val = 4;
+
+
+		// console.log(maxA);
+		// console.log(maxB);
+		// console.log(loc_max_arr);
+		// console.log(max_val);
 
 		theChart = new Chart(ctx, {
             type: 'barError',
@@ -226,7 +258,7 @@ $(document).on("turbolinks:load", function() {
 		            	// stacked: true,
 		                ticks: {
 		                    beginAtZero:true,
-                            max: 5,
+                            max: max_val*1.1,
 		                    min: 0,
 		                    stepSize: 0.5
 		                }
