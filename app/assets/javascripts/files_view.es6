@@ -187,24 +187,24 @@ $(document).on("turbolinks:load", function() {
 		var ctx = document.getElementById("myMedChart");
 
 		// console.log(data_arrayA);
-		console.log(data_arrayB == 0);
-		// if(typeof data_arrayA == array){
-		// 	var maxA = Math.max.apply(Math, data_arrayA);
-		// }
-		// if(typeof data_arrayB == array){
-		// 	var maxB = Math.max.apply(Math, data_arrayB);
-		// }
-		// if(maxA && maxB){
-		// 	var loc_max_arr = [maxA, maxB];
-		// 	var max_val = Math.max.apply(Math, loc_max_arr);
-		// }else if(maxA){
-		// 	var max_val = maxA;
-		// }else if(maxB){
-		// 	var max_val = maxB;
-		// }else{
-		// 	var max_val = 4;
-		// }
-		var max_val = 4;
+		// console.log(data_arrayB != 0);
+		if(data_arrayA != 0){
+			var maxA = Math.max.apply(Math, data_arrayA);
+		}
+		if(data_arrayB != 0){
+			var maxB = Math.max.apply(Math, data_arrayB);
+		}
+		if(maxA && maxB){
+			var loc_max_arr = [maxA, maxB];
+			var max_val = Math.max.apply(Math, loc_max_arr);
+		}else if(maxA){
+			var max_val = maxA;
+		}else if(maxB){
+			var max_val = maxB;
+		}else{
+			var max_val = 4;
+		}
+		// var max_val = 4;
 
 
 		// console.log(maxA);
@@ -258,7 +258,7 @@ $(document).on("turbolinks:load", function() {
 		            	// stacked: true,
 		                ticks: {
 		                    beginAtZero:true,
-                            max: max_val*1.1,
+                            max: max_val*1.2,
 		                    min: 0,
 		                    stepSize: 0.5
 		                }
