@@ -9,7 +9,6 @@ $(document).on("turbolinks:load", function() {
 		var color_arr = [];
 		var hovor_color_arr = [];
 		var final_price = 0;
-		var myPiechart;
 
 	function financial_data(num_index){
 
@@ -23,7 +22,9 @@ $(document).on("turbolinks:load", function() {
 		final_price += finan_data_arr[num_index];
 
 
-	if ($('#myPieChart').length > 0) {
+	if ($('.js-doughnut-container').length > 0) {
+		console.log(data_arr);
+		console.log(response_label);
 			var data = {
 		    labels: response_label,
 		    datasets: [
@@ -35,12 +36,13 @@ $(document).on("turbolinks:load", function() {
 			};
 
 
-	if(myPiechart){
-		console.log("This is printing")
-		myPiechart.update();
-	}else{
+	// if(myPiechart){
+	// 	console.log("This is printing")
+	// 	myPiechart.update();
+	// }else{
+		$('.js-doughnut-container').html(`<canvas id="myPieChart" width="300" height="300"></canvas>`);
 		var ctx = document.getElementById("myPieChart");
-		myPiechart = new Chart(ctx, {
+		var myPiechart = new Chart(ctx, {
 		    type: 'doughnut',
 		    data: data,
 		    options: {
@@ -51,8 +53,9 @@ $(document).on("turbolinks:load", function() {
 			    }
 		    }
 		});
+
 		//
-	}
+	// }
 		
 		Chart.pluginService.register({
 		  beforeDraw: function(chart) {
@@ -143,6 +146,7 @@ $(document).on("turbolinks:load", function() {
 					patient_id: patient_id},
 				url: `/api/files/${file_id}`,
 				success: function(response){
+					console.log("DONIGHT TIME SUCCES")
 					visualize_data(response); 
 					financial_data(num_index);
 				}
