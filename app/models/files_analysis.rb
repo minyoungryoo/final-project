@@ -3,29 +3,22 @@ require 'liblinear'
 class FilesAnalysis < ApplicationRecord
 	def doStuff(full_training_array, col_numsA, col_numsB, basic_attribute_array, basic_patient_condition)
 		# 19-25, 30-37, 50
+			type = nil
 
-			if col_numsA != nil && col_numsB != nil
-				result_arr_A = runAnalysis(full_training_array, col_numsA, basic_attribute_array, basic_patient_condition)
-				result_arr_B = runAnalysis(full_training_array, col_numsB, basic_attribute_array, basic_patient_condition)
-			elsif col_numsA != nil
+			if col_numsA != nil
 				result_arr_A = runAnalysis(full_training_array, col_numsA, basic_attribute_array, basic_patient_condition)
 				result_arr_B = [0, 0, 0]
+				type = "A"
 			elsif col_numsB != nil
 				result_arr_A = [0, 0, 0]
 				result_arr_B = runAnalysis(full_training_array, col_numsB, basic_attribute_array, basic_patient_condition)
-			else
-				result_arr_A = [0, 0, 0]
-				result_arr_B = [0, 0, 0]
+				type = "B"
 			end
 
 		def runAnalysis(full_training_array, col_nums, basic_attribute_array, basic_patient_condition)
 			full_attribute_array = full_training_array[0]
 			full_attribute_array = full_attribute_array[0..49]
 			
-			attribute_array = basic_attribute_array
-				col_nums.each do |i|
-					attribute_array = attribute_array.push(full_attribute_array[i.to_i])
-				end
 
 
 			full_training_array = full_training_array[1..119]
@@ -37,21 +30,25 @@ class FilesAnalysis < ApplicationRecord
 				end
 			end
 
+			attribute_array = basic_attribute_array
+				# col_nums.each do |i|
+				# end
 			basic_training_array = full_training_array.transpose[0..14]
 			training_array = basic_training_array
 			full_training_array = Matrix[ *full_training_array ]
+			patient_condition = basic_patient_condition.map(&:to_i)
 				col_nums.each do |i|
+					attribute_array = attribute_array.push(full_attribute_array[i.to_i])
 					tr_cols = full_training_array.column(i.to_i).to_a
 					training_array = training_array.push(tr_cols)
+					patient_condition = patient_condition.push(1)
 				end
 			#pushing final decision into array:
 					# 19-25, 30-37, 50
 
 			# patient_condition.fill(0, patient_condition.size, 35)
-			patient_condition = basic_patient_condition.map(&:to_i)
-			col_nums.each do |i|
-				patient_condition = patient_condition.push(1)
-			end
+			# col_nums.each do |i|
+			# end
 
 			full_decision_arr = []
 			mean_result_arr = []
@@ -89,6 +86,14 @@ class FilesAnalysis < ApplicationRecord
 		end
 
 		final_result_arr = [result_arr_A, result_arr_B]
+		if type == "A"
+			result_arr_A
+		elsif type == "B"
+			result_arr_B
+		else
+			[0, 0, 0]
+		end
+
 
 		# 0-14, 15-18, ... 26-29, 38-49 // not these
 

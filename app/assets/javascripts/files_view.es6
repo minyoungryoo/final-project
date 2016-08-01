@@ -9,8 +9,21 @@ $(document).on("turbolinks:load", function() {
 		var color_arr = [];
 		var hovor_color_arr = [];
 		var final_price = 0;
+		var data_cache = [
+			[0,0,0],
+			[0,0,0]
+		];
 
-	function financial_data(num_index){
+		var typeToIndex = {
+			A: 0,
+			B: 1
+		}
+
+	function financial_data(num_index, type){
+
+		if (type === "B") {
+			return;
+		}
 
 		var content_label = ["Varying Dosages of Hep/Asp", "Heparin", "Aspirin", "Followup to treatment", "Subcutaneous Heparin", "Antiplatelet Drug", "Intravenous Heparin", "Other Anticoagulants", "Calcium Antagonists", "Glycerol or manitol", "Steroids", "Haemodilution", "Carotid Surgery", "Thrombolysis", "Medication Taken at 6-months Followup"];
 		var finan_data_arr = [500, 640, 383, 200, 780, 320, 107, 372, 6000, 3000, 10, 68, 15000, 55, 200];
@@ -36,10 +49,6 @@ $(document).on("turbolinks:load", function() {
 			};
 
 
-	// if(myPiechart){
-	// 	console.log("This is printing")
-	// 	myPiechart.update();
-	// }else{
 		$('.js-doughnut-container').html(`<canvas id="myPieChart" width="300" height="300"></canvas>`);
 		var ctx = document.getElementById("myPieChart");
 		var myPiechart = new Chart(ctx, {
@@ -54,8 +63,6 @@ $(document).on("turbolinks:load", function() {
 		    }
 		});
 
-		//
-	// }
 		
 		Chart.pluginService.register({
 		  beforeDraw: function(chart) {
@@ -65,7 +72,7 @@ $(document).on("turbolinks:load", function() {
 			        ctx = chart.chart.ctx;
 
 			    ctx.restore();
-			    var fontSize = (height / 114).toFixed(2);
+			    var fontSize = (height / 150).toFixed(2);
 			    ctx.font = fontSize + "em sans-serif";
 			    ctx.textBaseline = "middle";
 
@@ -132,23 +139,34 @@ $(document).on("turbolinks:load", function() {
 			var num_id = $(event.currentTarget).data("id");
 			var num_index = $(event.currentTarget).data("index");
 			var type = $(event.currentTarget).data("searchtype");
+			var patient_id = $(event.currentTarget).data("patient-id");
+
+			var data = { patient_id: patient_id };
+
 			console.log(type);
 			if(type == "A"){
-			num_id_colA.push(num_id);
+				num_id_colA.push(num_id);
+				data.num_idA = num_id_colA;
 			}else if(type == "B"){
-			num_id_colB.push(num_id);
+				num_id_colB.push(num_id);
+				data.num_idB = num_id_colB;
 			}
-			var patient_id = $(event.currentTarget).data("patient-id");
+
 			$.ajax({
 				type: "GET",
-				data: {num_idA: num_id_colA,
-					num_idB: num_id_colB,
-					patient_id: patient_id},
+				data: data,
 				url: `/api/files/${file_id}`,
 				success: function(response){
-					console.log("DONIGHT TIME SUCCES")
-					visualize_data(response); 
-					financial_data(num_index);
+					// console.log("DONIGHT TIME SUCCES")
+
+					var index = typeToIndex[type];
+					data_cache[index] = response;
+
+					visualize_data(data_cache); 
+					financial_data(num_index, type);
+
+					console.log("data caching");
+					console.log(data_cache);
 				}
 			});
 		 });
@@ -160,6 +178,7 @@ $(document).on("turbolinks:load", function() {
 	
 
 	function visualize_data(response){
+		console.log(response);
 		medical_data(response);
 	}
 
@@ -277,9 +296,9 @@ $(document).on("turbolinks:load", function() {
 
 	}
 
-		function handleClick(evt){
-	    var activeElement = theChart.getElementAtEvent(evt);
-	    console.log(activeElement[0]._index);
+		function handleClick(evt, activeElement){
+	    console.log(activeElement);
+	    $('#myModal').modal('show')
 	    // <button type="button" data-toggle="modal" data-target="#myModal"></button>
 		}
 
