@@ -4,8 +4,6 @@
 
 $(document).on("turbolinks:load", function() {
 
-	if ($('#myPieChart').length > 0) {
-
 
 		var data_arr = [];
 		var response_label = [];
@@ -13,68 +11,76 @@ $(document).on("turbolinks:load", function() {
 		var hovor_color_arr = [];
 
 		// function financial_data(response, num_id){
-		var content_label = ["Varying Dosages of Hep/Asp", "Heparin", "Aspirin", "Followup to treatment", "Subcutaneous Heparin", 
-		"Antiplatelet Drug", "Intravenous Heparin", "Other Anticoagulants", "Calcium Antagonists", "Glycerol or manitol", "Steroids", 
-		"Haemodilution", "Carotid Surgery", "Thrombolysis", "Medication Taken at 6-months Followup"];
+		var content_label = ["Varying Dosages of Hep/Asp", "Heparin", "Aspirin", "Followup to treatment", "Subcutaneous Heparin", "Antiplatelet Drug", "Intravenous Heparin", "Other Anticoagulants", "Calcium Antagonists", "Glycerol or manitol", "Steroids", "Haemodilution", "Carotid Surgery", "Thrombolysis", "Medication Taken at 6-months Followup"];
+		// var finan_data_arr = ["$500","$640", "$383", "$200", "$780", "$320", "$107", "$372", "$6000", "$3000", "$10", "$68", "$15000", "$55", "$200"];
+		var finan_data_arr = ["500","640", "383", "200", "780", "320", "107", "372", "6000", "3000", "10", "68", "15000", "55", "200"];
 
-		var finan_data_arr = ["$500","$640", "$383", "$200", "$780", "$320", "$107", "$372", "$6000", "$3000", "$10", "$68", "$15000", "$55", "$200"];
-
-		var sample_color = ["#BC41EF", "#BB61F3", "#802D7C", "#ECF38B", "#D676D1", "#2F1081", "#AA208A", "#AA208A", "#AA208A", "#AA208A", "#AA208A", "#AA208A", "#AA208A", "#AA208A", "#AA208A"];
+		var sample_color = ["#BC41EF", "#BB61F3", "#802D7C", "#ECF38B", "#D676D1", "#2F1081", "#AA208A", "#FF6384", "#36A2EB", "#FFCE56", "#BC41EF", "red", "#AA208A", "#AA208A", "#AA208A"];
 
 		response_label.push(content_label[2]);
 		data_arr.push(finan_data_arr[2]);
 		color_arr.push(sample_color[2]);
 
+		console.log(content_label.length);
+		console.log(finan_data_arr.length);
+		console.log(sample_color.length);
 
 
-		var data = {
-			    labels: content_label,
-			    datasets: [
-			        {
-			            data: data_arr,
-			            backgroundColor: color_arr,
-			            hoverBackgroundColor: color_arr
-			        }]
-			};
-
-
-			var ctx = document.getElementById("myPieChart");
-			var myPiechart = new Chart(ctx, {
-			    type: 'doughnut',
-			    data: data,
-			    options: {
-			    	maintainAspectRatio: false,
-			    	 	responsive: true,
-				    legend: {
-				      display: false
-				    }
-			    }
-			});
-		// }
-
-			Chart.pluginService.register({
-			  beforeDraw: function(chart) {
-				if(chart.chart.canvas.id == "myPieChart"){
-				    var width = chart.chart.width,
-				        height = chart.chart.height,
-				        ctx = chart.chart.ctx;
-
-				    ctx.restore();
-				    var fontSize = (height / 114).toFixed(2);
-				    ctx.font = fontSize + "em sans-serif";
-				    ctx.textBaseline = "middle";
-
-				    var text = "75%",
-				        textX = Math.round((width - ctx.measureText(text).width) / 2),
-				        textY = height / 2;
-
-				    ctx.fillText(text, textX, textY);
-				    ctx.save();
-				}
-			  }
-			});
-
+	if ($('#myPieChart').length > 0) {
+				var data = {
+		    // labels: response_label,
+		    // datasets: [
+		    //     {
+		    //         data: data_arr,
+		    //         backgroundColor: color_arr,
+		    //         hoverBackgroundColor: color_arr
+		    //     }]
+	    	    labels: content_label,
+		    datasets: [
+		        {
+		            data: finan_data_arr,
+		            backgroundColor: sample_color,
+		            hoverBackgroundColor: sample_color
+		        }]
 		};
+
+
+		var ctx = document.getElementById("myPieChart");
+		var myPiechart = new Chart(ctx, {
+		    type: 'doughnut',
+		    data: data,
+		    options: {
+		    	maintainAspectRatio: false,
+		    	 	responsive: true,
+			    legend: {
+			      display: false
+			    }
+		    }
+		});
+
+		Chart.pluginService.register({
+		  beforeDraw: function(chart) {
+			if(chart.chart.canvas.id == "myPieChart"){
+			    var width = chart.chart.width,
+			        height = chart.chart.height,
+			        ctx = chart.chart.ctx;
+
+			    ctx.restore();
+			    var fontSize = (height / 114).toFixed(2);
+			    ctx.font = fontSize + "em sans-serif";
+			    ctx.textBaseline = "middle";
+
+			    var text = "75%",
+			        textX = Math.round((width - ctx.measureText(text).width) / 2),
+			        textY = height / 2;
+
+			    ctx.fillText(text, textX, textY);
+			    ctx.save();
+			}
+		  }
+		});
+
+	};
 
 	if ($('.js-chart-container').length > 0) {
 
@@ -132,7 +138,6 @@ $(document).on("turbolinks:load", function() {
 	// var data_arr = [];
 	// var response_label = [];
 	// var color_arr = [];
-	var theChart;
 	// var error_arr = [];
 
 	function visualize_data(response, num_id){
@@ -149,7 +154,6 @@ $(document).on("turbolinks:load", function() {
 
 		// updateChart();
 		medical_data(response);
-		// financial_data(response, num_id);
 	}
 
 
@@ -201,6 +205,7 @@ $(document).on("turbolinks:load", function() {
 
 
 	function medical_data(response) {
+		var theChart;
 		var data_array = response[1];
 		var error_array = response[2];
 		var arr_length = data_array.length;
@@ -219,8 +224,6 @@ $(document).on("turbolinks:load", function() {
 		$('.js-med-chart-container').html(`<canvas id="myMedChart" data-id="${id}" width="300" height="200"></canvas>`);
 
 		var ctx = document.getElementById("myMedChart");
-
-		var theChart;
 
 		theChart = new Chart(ctx, {
             type: 'barError',
