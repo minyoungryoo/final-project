@@ -17,8 +17,8 @@ class FilesAnalysis < ApplicationRecord
 			end
 
 
-		# full_training_array = full_training_array[1..119]
-		full_training_array.shift
+		full_training_array = full_training_array[1..119]
+		# full_training_array.shift
 
 		# puts "full training_array"
 		# p full_training_array
