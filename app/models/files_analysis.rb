@@ -19,7 +19,7 @@ class FilesAnalysis < ApplicationRecord
 
 		# full_training_array = full_training_array[1..119]
 		full_training_array.shift
-		
+
 		# puts "full training_array"
 		# p full_training_array
 		# puts "end **************************"
@@ -89,7 +89,7 @@ class FilesAnalysis < ApplicationRecord
 				crossVal_result = Liblinear.cross_validation(fold, parameter, attribute_labels, training_array).mean
 				full_result = [decision, lablinear_result, crossVal_result]
 				mean_result = full_result.mean
-				std_result = full_result.sd
+				std_result = full_result.sd/(Math.sqrt(training_array.length))
 				full_decision_arr = full_decision_arr.push(full_result)
 				mean_result_arr = mean_result_arr.push(mean_result)
 				std_result_arr = std_result_arr.push(std_result)
