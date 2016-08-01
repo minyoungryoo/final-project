@@ -1,18 +1,18 @@
 require 'liblinear'
 
 class FilesAnalysis < ApplicationRecord
-	# def doStuff(full_training_array, col_nums)
-	def doStuff(full_training_array, col_nums, basic_attribute_array, basic_patient_condition)
+	# def doStuff(full_training_array, col_numsA)
+	def doStuff(full_training_array, col_numsA, col_numsB, basic_attribute_array, basic_patient_condition)
 
 		# 19-25, 30-37, 50
 
-		if col_nums != nil
+		if col_numsA != nil
 
 		full_attribute_array = full_training_array[0]
 		full_attribute_array = full_attribute_array[0..49]
 		
 		attribute_array = basic_attribute_array
-			col_nums.each do |i|
+			col_numsA.each do |i|
 				attribute_array = attribute_array.push(full_attribute_array[i.to_i])
 			end
 
@@ -32,7 +32,7 @@ class FilesAnalysis < ApplicationRecord
 		basic_training_array = full_training_array.transpose[0..14]
 		training_array = basic_training_array
 		full_training_array = Matrix[ *full_training_array ]
-			col_nums.each do |i|
+			col_numsA.each do |i|
 				tr_cols = full_training_array.column(i.to_i).to_a
 				training_array = training_array.push(tr_cols)
 			end
@@ -41,7 +41,7 @@ class FilesAnalysis < ApplicationRecord
 
 		# patient_condition.fill(0, patient_condition.size, 35)
 		patient_condition = basic_patient_condition.map(&:to_i)
-		col_nums.each do |i|
+		col_numsA.each do |i|
 			# patient_condition[i.to_i] = 1
 			patient_condition = patient_condition.push(1)
 		end

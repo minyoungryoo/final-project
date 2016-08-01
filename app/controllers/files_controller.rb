@@ -50,9 +50,13 @@ class FilesController < ApplicationController
 		file = ProcessFile.find(params[:id])
 		array = File.read(file.csv_file.path)
 		readable_array = JSON.parse(array)
-		col_num = params[:num_id]
+		col_numA = params[:num_idA]
+		col_numB = params[:num_idB]
 		patient_id = params[:patient_id]
-		# session[:patient_id_file] = patient_id
+		# session[:test] = [1,2,3]
+		# session[:testB] = [4,5,6]
+
+
 
 		attr_arr = FilesAnalysis.find_by(patient_id: patient_id).patient_attr_data
 		data_arr = FilesAnalysis.find_by(patient_id: patient_id).patient_data
@@ -65,14 +69,16 @@ class FilesController < ApplicationController
 
 		if data_arr.length > 0 
 			# do analysis
-			result = FilesAnalysis.new.doStuff(readable_array, col_num, attr_arr, data_arr)
+			result = FilesAnalysis.new.doStuff(readable_array, col_numA, col_numB, attr_arr, data_arr)
+			session[:test] << 1
 		end
-		# result = FilesAnalysis.new.doStuff(readable_array, col_num)
-
-		puts "Result isss"
-		p result
-		puts "End****************************"
-
+		# result = FilesAnalysis.new.doStuff(readable_array, col_numA)
+		puts "Session test"
+		# p session[:test]
+		# p session[:testB]
+		p col_numA
+		p col_numB
+		puts "end ************"
 		# result = readable_array[0]
 		render json: result
 	end
