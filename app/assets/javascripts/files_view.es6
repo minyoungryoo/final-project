@@ -84,7 +84,6 @@ $(document).on("turbolinks:load", function() {
 		"Haemodilution", "Carotid Surgery", "Thrombolysis", "Medication Taken at 6-months Followup"];
 
 // 16-18, 38-49
-		console.log(content_label[1]);
 
 		for(var i=0; i<=14; i++){
 			if (i<=2){
@@ -196,7 +195,7 @@ $(document).on("turbolinks:load", function() {
 
 		var data_array = [1,2,3];
 		// var data_label = ["Major Non-cerebral Hemorrhage", "Other Side Effect", "Recurrent Ischemic Stroke", "Recurrent hemorrhagic Stroke", "Recurrent unknown Stroke", "Pulmonary embolism", "Death", "Indicator for hemorrhagic stroke", "Indicator for ischemic stroke","Indicator for indeterminate stroke","Indicator for hemorrhagic transform","Indicator for pulmonary embolism","Indicator for deep vein thrombosis","Indicator for major non-cerebral bleed","Indicator for any stroke"];
-		// 19-37
+		// 19-37 NOT THIS
 		// 19-25, 30-37
 		var data_label = ["Side Effect A", "Side Effect B", "Most likely result" ]
 		var color_array = ['rgba(255, 99, 132, 0.2)','rgba(255, 99, 132, 0.2)','rgba(255, 99, 132, 0.2)'];

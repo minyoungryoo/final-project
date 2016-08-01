@@ -40,9 +40,9 @@ class FilesController < ApplicationController
 			data_id = session[:data_id]
 			file = FilesAnalysis.find(data_id).update(patient_attr_data: attr_arr, patient_data: index_arr)
 		end
-		puts "PRTY IMPORTANT STUFF*************************"
-		p FilesAnalysis.find(session[:data_id])
-		puts "PRTY IMPORTANT STUFF*************************"
+		# puts "PRTY IMPORTANT STUFF*************************"
+		# p FilesAnalysis.find(session[:data_id])
+		# puts "PRTY IMPORTANT STUFF*************************"
 
 	end
 
@@ -57,11 +57,11 @@ class FilesController < ApplicationController
 		attr_arr = FilesAnalysis.find_by(patient_id: patient_id).patient_attr_data
 		data_arr = FilesAnalysis.find_by(patient_id: patient_id).patient_data
 
-		puts "**************PARAMS*****************"
-		# p session[:patient_id_file]
-		p attr_arr.length
-		p data_arr
-		puts "*******************************"
+		# puts "**************PARAMS*****************"
+		# # p session[:patient_id_file]
+		# p attr_arr.length
+		# p data_arr
+		# puts "*******************************"
 
 		if data_arr.length > 0 
 			# do analysis
@@ -69,7 +69,11 @@ class FilesController < ApplicationController
 		end
 		# result = FilesAnalysis.new.doStuff(readable_array, col_num)
 
-		result = readable_array[0]
+		puts "Result isss"
+		p result
+		puts "End****************************"
+
+		# result = readable_array[0]
 		render json: result
 	end
 

@@ -17,7 +17,9 @@ class FilesAnalysis < ApplicationRecord
 			end
 
 
-		full_training_array = full_training_array[1..125]
+		# full_training_array = full_training_array[1..119]
+		full_training_array.shift
+		
 		# puts "full training_array"
 		# p full_training_array
 		# puts "end **************************"
@@ -44,9 +46,9 @@ class FilesAnalysis < ApplicationRecord
 			patient_condition = patient_condition.push(1)
 		end
 
-		puts "PAtient condition"
-		p patient_condition
-		puts "End **********************"
+		# puts "PAtient condition"
+		# p patient_condition
+		# puts "End **********************"
 
 		full_decision_arr = []
 		mean_result_arr = []
@@ -56,12 +58,10 @@ class FilesAnalysis < ApplicationRecord
 		n = -1
 		for i in 19..50
 			if (i >= 19 && i <= 25) || (i >= 30 && i <= 37) || i == 50
-		# i = 50
+				# i = 50
 				# puts "i is:"
 				# p i
 				# puts "end"
-
-				training_array = training_array.push(full_training_array.column(i).to_a)
 				# puts "training array before"
 				# p training_array
 				# puts "end *************************"
@@ -69,13 +69,19 @@ class FilesAnalysis < ApplicationRecord
 				# puts "training array after"
 				# p training_array
 				# puts "End@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
-				dec_tree = DecisionTree::ID3Tree.new(attribute_array, training_array, "1", :continuous)
+
+				training_array = training_array.push(full_training_array.column(i).to_a)
+				if i == 50
+					dec_tree = DecisionTree::ID3Tree.new(attribute_array, training_array, "4", :continuous)
+				else
+					dec_tree = DecisionTree::ID3Tree.new(attribute_array, training_array, "1", :continuous)
+				end
 				dec_tree.train
 				decision = dec_tree.predict(patient_condition)
 
-				puts "Training array size"
-				p training_array.transpose.size
-				puts "end ***********************************"
+				# puts "Training array size"
+				# p training_array.transpose.size
+				# puts "end ***********************************"
 
 				attribute_labels = training_array.transpose[n]
 				model = Liblinear.train(parameter, attribute_labels, training_array)
@@ -91,11 +97,13 @@ class FilesAnalysis < ApplicationRecord
 			end
 		end
 
-		puts "==========DECISOIN+++++++++++++++"
-		p full_decision_arr
-		p mean_result_arr
-		p std_result_arr
-		puts "==========DECISOIN+++++++++++++++"
+		result = [full_decision_arr, mean_result_arr, std_result_arr]
+
+		# puts "==========DECISOIN+++++++++++++++"
+		# p full_decision_arr
+		# p mean_result_arr
+		# p std_result_arr
+		# puts "==========DECISOIN+++++++++++++++"
 
 		# puts "Training arrays all"
 		# p all_training_arr.length
