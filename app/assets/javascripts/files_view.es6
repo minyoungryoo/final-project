@@ -6,9 +6,15 @@ $(document).on("turbolinks:load", function() {
 
 		var data_arr = [];
 		var response_label = [];
-		var color_arr = [];
-		var hovor_color_arr = [];
 		var final_price = 0;
+		var color_arr = [];
+
+		var data_arr2 = [];
+		var response_label2 = [];
+		var final_price2 = 0;
+		var color_arr2 = [];
+
+		var hovor_color_arr = [];
 		var data_cache = [
 			[0,0,0],
 			[0,0,0]
@@ -21,23 +27,18 @@ $(document).on("turbolinks:load", function() {
 
 	function financial_data(num_index, type){
 
-		if (type === "B") {
-			return;
-		}
 
 		var content_label = ["Varying Dosages of Hep/Asp", "Heparin", "Aspirin", "Followup to treatment", "Subcutaneous Heparin", "Antiplatelet Drug", "Intravenous Heparin", "Other Anticoagulants", "Calcium Antagonists", "Glycerol or manitol", "Steroids", "Haemodilution", "Carotid Surgery", "Thrombolysis", "Medication Taken at 6-months Followup"];
 		var finan_data_arr = [500, 640, 383, 200, 780, 320, 107, 372, 6000, 3000, 10, 68, 15000, 55, 200];
 		var sample_color = ["#BC41EF", "#BB61F3", "#802D7C", "#ECF38B", "#D676D1", "#2F1081", "#AA208A", "#FF6384", "#36A2EB", "#FFCE56", "#BC41EF", "#FA8072", "#B0C627", "#27AEC6", "#C6A727"];
 
+		if (type === "A") {
+			// return;
 		response_label.push(content_label[num_index]);
 		data_arr.push(finan_data_arr[num_index]);
 		color_arr.push(sample_color[num_index]);
 		final_price += finan_data_arr[num_index];
 
-
-	if ($('.js-doughnut-container').length > 0) {
-		console.log(data_arr);
-		console.log(response_label);
 			var data = {
 		    labels: response_label,
 		    datasets: [
@@ -85,7 +86,62 @@ $(document).on("turbolinks:load", function() {
 			}
 		  }
 		});
-};
+
+	}else if(type === "B"){
+		response_label2.push(content_label[num_index]);
+		data_arr2.push(finan_data_arr[num_index]);
+		color_arr2.push(sample_color[num_index]);
+		final_price2 += finan_data_arr[num_index];
+
+			var data = {
+		    labels: response_label2,
+		    datasets: [
+		        {
+		            data: data_arr2,
+		            backgroundColor: color_arr2,
+		            hoverBackgroundColor: color_arr2
+		        }]
+			};
+
+
+		$('.js-doughnut-container2').html(`<canvas id="myPieChart2" width="300" height="300"></canvas>`);
+		var ctx = document.getElementById("myPieChart2");
+		var myPiechart2 = new Chart(ctx, {
+		    type: 'doughnut',
+		    data: data,
+		    options: {
+		    	maintainAspectRatio: false,
+		    	 	responsive: true,
+			    legend: {
+			      display: true
+			    }
+		    }
+		});
+
+		
+		Chart.pluginService.register({
+		  beforeDraw: function(chart) {
+			if(chart.chart.canvas.id == "myPieChart2"){
+			    var width = chart.chart.width,
+			        height = chart.chart.height,
+			        ctx = chart.chart.ctx;
+
+			    ctx.restore();
+			    var fontSize = (height / 150).toFixed(2);
+			    ctx.font = fontSize + "em sans-serif";
+			    ctx.textBaseline = "middle";
+
+			    var text = `$ ${final_price2}.00`,
+			        textX = Math.round((width - ctx.measureText(text).width) / 2),
+			        textY = height / 2;
+
+			    ctx.fillText(text, textX, textY);
+			    ctx.save();
+			}
+		  }
+		});
+
+		}
 
 
 	};
