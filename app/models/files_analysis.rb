@@ -6,7 +6,6 @@ class FilesAnalysis < ApplicationRecord
 
 		# 19-25, 30-37, 50
 
-
 		if col_nums != nil
 
 		full_attribute_array = full_training_array[0]
@@ -17,7 +16,11 @@ class FilesAnalysis < ApplicationRecord
 				attribute_array = attribute_array.push(full_attribute_array[i.to_i])
 			end
 
-		full_training_array = full_training_array[1..112]
+
+		full_training_array = full_training_array[1..125]
+		# puts "full training_array"
+		# p full_training_array
+		# puts "end **************************"
 		full_training_array.each do |row|
 			row.map! do |element|
 				element.to_i #changed from f
@@ -32,56 +35,109 @@ class FilesAnalysis < ApplicationRecord
 				training_array = training_array.push(tr_cols)
 			end
 		#pushing final decision into array:
-		training_array = training_array.push(full_training_array.column(50).to_a)
-		training_array = training_array.transpose
-
-
-		dec_tree = DecisionTree::ID3Tree.new(attribute_array, training_array, "1", :continuous)
-		dec_tree.train
-
-		patient_condition = basic_patient_condition.map(&:to_i)
-
 				# 19-25, 30-37, 50
-		# 0-14, 15-18, ... 26-29, 38-49 
 
 		# patient_condition.fill(0, patient_condition.size, 35)
+		patient_condition = basic_patient_condition.map(&:to_i)
 		col_nums.each do |i|
 			# patient_condition[i.to_i] = 1
 			patient_condition = patient_condition.push(1)
 		end
+
+		puts "PAtient condition"
+		p patient_condition
+		puts "End **********************"
+
+		full_decision_arr = []
+		mean_result_arr = []
+		std_result_arr = []
+		parameter = { solver_type: Liblinear::L1R_LR  }
+		fold = 3
+		n = -1
+		for i in 19..50
+			if (i >= 19 && i <= 25) || (i >= 30 && i <= 37) || i == 50
+		# i = 50
+				# puts "i is:"
+				# p i
+				# puts "end"
+
+				training_array = training_array.push(full_training_array.column(i).to_a)
+				# puts "training array before"
+				# p training_array
+				# puts "end *************************"
+				# training_array = training_array.transpose
+				# puts "training array after"
+				# p training_array
+				# puts "End@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+				dec_tree = DecisionTree::ID3Tree.new(attribute_array, training_array, "1", :continuous)
+				dec_tree.train
+				decision = dec_tree.predict(patient_condition)
+
+				puts "Training array size"
+				p training_array.transpose.size
+				puts "end ***********************************"
+
+				attribute_labels = training_array.transpose[n]
+				model = Liblinear.train(parameter, attribute_labels, training_array)
+				lablinear_result = Liblinear.predict(model, patient_condition)
+				crossVal_result = Liblinear.cross_validation(fold, parameter, attribute_labels, training_array).mean
+				full_result = [decision, lablinear_result, crossVal_result]
+				mean_result = full_result.mean
+				std_result = full_result.sd
+				full_decision_arr = full_decision_arr.push(full_result)
+				mean_result_arr = mean_result_arr.push(mean_result)
+				std_result_arr = std_result_arr.push(std_result)
+				n -= 1
+			end
+		end
+
+		puts "==========DECISOIN+++++++++++++++"
+		p full_decision_arr
+		p mean_result_arr
+		p std_result_arr
+		puts "==========DECISOIN+++++++++++++++"
+
+		# puts "Training arrays all"
+		# p all_training_arr.length
+		# puts "End **********************"
+
+		# training_array = training_array.push(full_training_array.column(50).to_a)
+
+
+
+
+		# 0-14, 15-18, ... 26-29, 38-49 // not these
 
 		# IF WANT TO TEST ***************************
 				# patient_condition = training_array[1].reverse.drop(1).reverse
 		#USE THIS
 
 
-		decision = dec_tree.predict(patient_condition)
 
-		puts "========DECISION==========="
-		puts decision
-		# puts "========ACTUAL DECISION==========="
-		# p training_array[1]
-		puts "========+++++++++++++============="
+		# puts "========DECISION==========="
+		# puts decision
+		# # puts "========ACTUAL DECISION==========="
+		# # p training_array[1]
+		# puts "========+++++++++++++============="
 
 		# # # dec_tree.graph("discrete")
 
 
-		parameter = { solver_type: Liblinear::L1R_LR  }
-		attribute_labels = training_array.transpose[-1]
-		puts "ATTR LAB ++++++++++++++++++++"
-		p attribute_labels
-		puts "++++++ ++++++++++++++++++++"
+		# puts "ATTR LAB ++++++++++++++++++++"
+		# p attribute_labels
+		# puts "++++++ ++++++++++++++++++++"
 		# bias = -1
-		fold = 3
 
-		model = Liblinear.train(parameter, attribute_labels, training_array)
+		# puts "=========PREDICT UINSG LABLINEAR=========="
+		# puts lablinear_result
+		# puts "----------PREDICT USING CROSS VAL------------"
+		# puts crossVal_result
+		# puts "==================="
 
-		puts "=========PREDICT UINSG LABLINEAR=========="
-		puts Liblinear.predict(model, patient_condition)
-		puts "----------PREDICT USING CROSS VAL------------"
-		puts Liblinear.cross_validation(fold, parameter, attribute_labels, training_array).mean
-		puts "==================="
 
+
+		# lr=Statsample::Regression::Binomial::Logit(training_array,attribute_labels)
+		# std_result = lr.standard_error
 
 
 

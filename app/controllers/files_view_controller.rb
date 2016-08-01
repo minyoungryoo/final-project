@@ -10,7 +10,7 @@ class FilesViewController < ApplicationController
 
 		# render json: result
 		# redirect_to "/files/show"
-
+		@file_id = ProcessFile.find_by(csv_file_file_name: "stroke_data_full.json").id
 		render 'show'
 	end
 end
