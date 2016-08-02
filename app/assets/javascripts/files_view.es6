@@ -60,10 +60,28 @@ $(document).on("turbolinks:load", function() {
 		    	 	responsive: true,
 			    legend: {
 			      display: true
-			    }
+			      // ,
+		// 		  onClick: function(e, legendItem) {
+		// 	// console.log(myPiechart.getDatasetAtEvent(e));
+		// 	var index = legendItem.datasetIndex;
+		// 	var ci = this.chart;
+		// 	var meta = ci.getDatasetMeta(index);
+
+		// 	// See controller.isDatasetVisible comment
+		// 	meta.hidden = meta.hidden === null? !ci.data.datasets[index].hidden : null;
+
+		// 	// We hid a dataset ... rerender the chart
+		// 	ci.update();
+		// }
+			    },
 		    }
 		});
 
+		// function changeTotal (event, legendItem) { 
+		// 	// final_price += finan_data_arr[num_index];
+		// 		// console.log(event);
+		// 		// console.log(legendItem);
+		// 	    };
 		
 		Chart.pluginService.register({
 		  beforeDraw: function(chart) {
@@ -77,7 +95,7 @@ $(document).on("turbolinks:load", function() {
 			    ctx.font = fontSize + "em sans-serif";
 			    ctx.textBaseline = "middle";
 
-			    var text = `$ ${final_price}.00`,
+			    var text = `$${final_price}.00`,
 			        textX = Math.round((width - ctx.measureText(text).width) / 2),
 			        textY = height / 2;
 
@@ -131,7 +149,7 @@ $(document).on("turbolinks:load", function() {
 			    ctx.font = fontSize + "em sans-serif";
 			    ctx.textBaseline = "middle";
 
-			    var text = `$ ${final_price2}.00`,
+			    var text = `$${final_price2}.00`,
 			        textX = Math.round((width - ctx.measureText(text).width) / 2),
 			        textY = height / 2;
 
@@ -213,7 +231,6 @@ $(document).on("turbolinks:load", function() {
 				data: data,
 				url: `/api/files/${file_id}`,
 				success: function(response){
-					// console.log("DONIGHT TIME SUCCES")
 
 					var index = typeToIndex[type];
 					data_cache[index] = response;
@@ -261,8 +278,6 @@ $(document).on("turbolinks:load", function() {
 
 		var ctx = document.getElementById("myMedChart");
 
-		// console.log(data_arrayA);
-		// console.log(data_arrayB != 0);
 		if(data_arrayA != 0){
 			var maxA = Math.max.apply(Math, data_arrayA);
 		}
@@ -279,13 +294,6 @@ $(document).on("turbolinks:load", function() {
 		}else{
 			var max_val = 4;
 		}
-		// var max_val = 4;
-
-
-		// console.log(maxA);
-		// console.log(maxB);
-		// console.log(loc_max_arr);
-		// console.log(max_val);
 
 		theChart = new Chart(ctx, {
             type: 'barError',
@@ -349,9 +357,17 @@ $(document).on("turbolinks:load", function() {
 	}
 
 		function handleClick(evt, activeElement){
-	    console.log(activeElement);
-	    $('#myModal').modal('show')
-	    // <button type="button" data-toggle="modal" data-target="#myModal"></button>
+	    var i = activeElement[0]._index;
+	    var disease_name = activeElement[0]._xScale.ticks[i];
+		$.ajax({
+			type: "GET",
+			url: `/files/${file_id}`,
+			data: {disease_name: disease_name},
+			// success: initialize_data
+		});
+	    // ajax 
+	    // /files/:id
+	    $('#myModal').modal('show');
 		}
 
 
