@@ -56,6 +56,10 @@ $(document).on("turbolinks:load", function() {
 		    type: 'doughnut',
 		    data: data,
 		    options: {
+		    	title: {
+                       display: true,
+                       text: 'Action A'
+                           },
 		    	maintainAspectRatio: false,
 		    	 	responsive: true,
 			    legend: {
@@ -128,6 +132,10 @@ $(document).on("turbolinks:load", function() {
 		    type: 'doughnut',
 		    data: data,
 		    options: {
+		    	title: {
+                      display: true,
+                      text: 'Action B'
+                         },
 		    	maintainAspectRatio: false,
 		    	 	responsive: true,
 			    legend: {
@@ -329,7 +337,7 @@ $(document).on("turbolinks:load", function() {
 		    options: {
 		    	        title: {
 			            display: true,
-			            text: 'Title of this graph'
+			            text: 'Side Effects vs. Final Condition'
 				        },
 		        scales: {
 	        	     xAxes: [
