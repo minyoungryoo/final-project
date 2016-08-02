@@ -19,8 +19,9 @@ class UsersController < ApplicationController
 		patient_id = @user.id
 		@attr_arr = FilesAnalysis.find_by(patient_id: patient_id).patient_attr_data
 		@data_arr = FilesAnalysis.find_by(patient_id: patient_id).patient_data
+		@desc_arr = FilesAnalysis.find_by(patient_id: patient_id).patient_desc
 
-		@condition_name = ["Conscious state","Patient's gender", "Age in years", "Symptoms noted on Walking", "Atrial Fibrillation", "Infarct visible on CT", "Systolic blood pressure", "Face deficit", "Arm/hand deficit Leg/foot deficit", "Dysphasia", "Hemianopia", "Visuospatial Disorder", "Brainstem/cerebellar signs", "Other deficit"]
+		@condition_name = ["Conscious state","Patient's gender", "Age in years", "Symptoms noted on Walking", "Atrial Fibrillation", "Infarct visible on CT", "Systolic blood pressure", "Face deficit", "Arm/hand deficit", "Leg/foot deficit", "Dysphasia", "Hemianopia", "Visuospatial Disorder", "Brainstem/cerebellar signs", "Other deficit"]
 
 		@file_id = ProcessFile.find_by(csv_file_file_name: "stroke_data_full.json").id
 		render 'profile'
@@ -37,7 +38,8 @@ class UsersController < ApplicationController
 
 	def patient_profile_edit
 		@all_users = User.all 
-		# @select_user = params[:select_user]
+		select_patient_id = params[:patient_id]
+		@select_patient = User.find(select_patient_id)
 		render 'patient_profile_edit'
 	end
 end

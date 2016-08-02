@@ -2,7 +2,7 @@
 
 <div class="form-group">
   <label for="sel1">Select Patient From List:</label>
-  <select class="js-form-control" id="sel1">
+  <select class="selectpicker js-form-control" data-style="btn-primary" id="sel1">
     <% @all_users.each do |user| %>
     <option class="js-patient-list" data-id="<%=user.id%>"><%=user.name%></option>
     <% end %>
@@ -163,9 +163,13 @@
   </div>
 </div>
 
-<h3>****Warning: All fields must be completed in order to work; put Not Applicable (N/A) if needed*******</h3>
+<h3>****Warning: All fields must be completed in order to work; put Not Applicable (N/A) if no information available*******</h3>
 
-<p>View Profile for Patient</p>
+<p>
+View Profile for Current Patient: 
+<%= link_to "#{@select_patient.name}'s profile", "/users/#{@select_patient.id}/profile" %>
+</p>
+
 
 
 

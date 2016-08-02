@@ -8,9 +8,9 @@
 		  <table class="table table-hover">
 		    <thead>
 		      <tr>
-		        <th>Condition</th>
-		        <th>Diagnosis</th>
-		        <th>Description</th>
+		        <th class="text-center">Condition</th>
+		        <th class="text-center">Diagnosis</th>
+		        <th class="text-center">Description</th>
 		      </tr>
 		    </thead>
 		    <tbody>
@@ -18,7 +18,7 @@
 		      <tr>
 		        <td><%=@condition_name[index]%> (<%= attribute %>)</td>
 		        <td><%= @data_arr[index]%></td>
-		        <td>N/A</td>
+		        <td><%= @desc_arr[index]%></td>
 		      </tr>
 		      	<% end %>
 		    </tbody>

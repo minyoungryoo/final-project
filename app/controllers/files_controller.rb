@@ -30,12 +30,17 @@ class FilesController < ApplicationController
 		index_arr = params[:basic_index]
 		desc_arr = params[:basic_diag_desc]
 
+
 		if patient_id != nil && (FilesAnalysis.find_by(patient_id: patient_id))
 			session[:data_id] = FilesAnalysis.find_by(patient_id: patient_id).id
 		elsif patient_id != nil
 			patient_data = FilesAnalysis.create(patient_id: patient_id)
 			session[:data_id] = patient_data.id
 		end
+
+		puts "length"
+		p index_arr.length
+		puts "End"
 
 		if index_arr && index_arr.length == 15	
 			data_id = session[:data_id]
