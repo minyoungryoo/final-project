@@ -95,7 +95,7 @@ $(document).on("turbolinks:load", function() {
 			        ctx = chart.chart.ctx;
 
 			    ctx.restore();
-			    var fontSize = (height / 150).toFixed(2);
+			    var fontSize = (height / 200).toFixed(2);
 			    ctx.font = fontSize + "em sans-serif";
 			    ctx.textBaseline = "top";
 
@@ -153,7 +153,7 @@ $(document).on("turbolinks:load", function() {
 			        ctx = chart.chart.ctx;
 
 			    ctx.restore();
-			    var fontSize = (height / 150).toFixed(2);
+			    var fontSize = (height / 200).toFixed(2);
 			    ctx.font = fontSize + "em sans-serif";
 			    ctx.textBaseline = "top";
 
@@ -221,7 +221,12 @@ $(document).on("turbolinks:load", function() {
 
 				}
 			});
+
 		 });
+
+					if ($('input.checkbox_check').is(':checked')) {
+				console.log("checked");
+					}
 	
 		}	
 
