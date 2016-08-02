@@ -17,9 +17,11 @@ class UsersController < ApplicationController
 	def profile
 		@user = User.find(params[:id])
 		patient_id = @user.id
-		@attr_arr = FilesAnalysis.find_by(patient_id: patient_id).patient_attr_data
-		@data_arr = FilesAnalysis.find_by(patient_id: patient_id).patient_data
-		@desc_arr = FilesAnalysis.find_by(patient_id: patient_id).patient_desc
+		patient = FilesAnalysis.find_by(patient_id: patient_id)
+		
+		@attr_arr = patient.patient_attr_data
+		@data_arr = patient.patient_data
+		@desc_arr = patient.patient_desc
 
 		@condition_name = ["Conscious state","Patient's gender", "Age in years", "Symptoms noted on Walking", "Atrial Fibrillation", "Infarct visible on CT", "Systolic blood pressure", "Face deficit", "Arm/hand deficit", "Leg/foot deficit", "Dysphasia", "Hemianopia", "Visuospatial Disorder", "Brainstem/cerebellar signs", "Other deficit"]
 

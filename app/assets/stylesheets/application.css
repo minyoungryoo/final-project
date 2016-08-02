@@ -15,6 +15,10 @@
  *= require_self
  */
 
+.question-text {
+	font-size: 200% !important;
+	color: red !important;
+}
 
  .form-bottom {
 	background-color: #92B1C9;
@@ -25,3 +29,10 @@
 	height: 50px !important;
 }
 
+.login-button {
+	background-color: "white" !important;
+}
+
+.social-login h3 {
+    color: #4A5FCA !important;
+}

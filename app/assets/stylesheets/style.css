@@ -157,13 +157,17 @@ img { max-width: 100%; }
 }
 
 .social-login h3 {
-	color: #fff;
+    color: #4A5FCA;
 }
 
 .social-login-buttons {
 	margin-top: 25px;
 }
 
+.question-text {
+	font-size: 200% !important;
+	color: red !important;
+}
 
 /***** Media queries *****/
 

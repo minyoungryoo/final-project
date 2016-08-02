@@ -6,11 +6,6 @@ class FilesViewController < ApplicationController
 	def show
 		@file_id = ProcessFile.find_by(csv_file_file_name: "stroke_data_full.json").id
 		@disease_name = params[:disease_name]
-		# @lala = "whoo"
-
-		puts "/n/n ~~~~~~~~~~~~~~~diesear~~~~~~~~~~~"
-		p @disease_name
-		puts "/n/n ~~~~~~~~~~~~~~~diesear~~~~~~~~~~~"
 
 		@content_label = ["Varying Dosages of Hep/Asp", "Heparin", "Aspirin", "Followup to treatment", "Subcutaneous Heparin", 
 		"Antiplatelet Drug", "Intravenous Heparin", "Other Anticoagulants", "Calcium Antagonists", "Glycerol or manitol", "Steroids", 

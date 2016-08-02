@@ -1,7 +1,13 @@
-<% if current_user.role == "admin" || current_user.role == "doctor" %>
-	<div class="container">
-		<h2>Profile for <%= @user.name %></h2>
-	<div>
+<% if current_user %>
+	<% if current_user.role == "admin" || current_user.role == "doctor" %>
+		<div class="container">
+			<h2>Profile for <%= @user.name %></h2>
+		<div>
+	<% elsif current_user %>
+		<div class="container">
+			<h2>Profile for <%= current_user.name %></h2>
+		<div>
+	<% end %>
 		<h3>Health Record:</h3>
 	</div>
 
@@ -9,8 +15,8 @@
 		    <thead>
 		      <tr>
 		        <th class="text-center">Condition</th>
-		        <th class="text-center">Diagnosis</th>
-		        <th class="text-center">Description</th>
+		        <th class="text-center">Diagnosis Number</th>
+		        <th class="text-center">Diagnosis Description</th>
 		      </tr>
 		    </thead>
 		    <tbody>
@@ -25,18 +31,18 @@
 		  </table>
 		</div>
 
-<% elsif current_user %>
+		<div class="question-text"> What can I do to improve my condition?</div>
+		<ul>
+			<li>
+				Disease type: <%= link_to 'Stroke',"/users/#{current_user.id}/files/#{@file_id}"%> 
+			</li>
+		</ul>
 
-	<p>What can I do to improve my condition?</p>
-	<ul>
-	<li>Disease type: <%= link_to 'Stroke',"/users/#{current_user.id}/files/#{@file_id}"%></li>
-	</ul>
-	<p></p>
+	<div>
+	<%= link_to 'Log out', destroy_user_session_path, method: 'delete' %>
+	</div>    
 
 <% else %>
 	<h2>You don't have permission to view this page</h2>
 <% end %>
 
-	<div>
-	<%= link_to 'Log out', destroy_user_session_path, method: 'delete' %>
-	</div>    
