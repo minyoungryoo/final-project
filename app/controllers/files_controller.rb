@@ -28,6 +28,7 @@ class FilesController < ApplicationController
 		patient_id = params[:basic_patient_id]
 		attr_arr = params[:basic_attr]
 		index_arr = params[:basic_index]
+		desc_arr = params[:basic_diag_desc]
 
 		if patient_id != nil && (FilesAnalysis.find_by(patient_id: patient_id))
 			session[:data_id] = FilesAnalysis.find_by(patient_id: patient_id).id
@@ -38,7 +39,7 @@ class FilesController < ApplicationController
 
 		if index_arr && index_arr.length == 15	
 			data_id = session[:data_id]
-			file = FilesAnalysis.find(data_id).update(patient_attr_data: attr_arr, patient_data: index_arr)
+			file = FilesAnalysis.find(data_id).update(patient_attr_data: attr_arr, patient_data: index_arr, patient_desc: desc_arr)
 		end
 	end
 

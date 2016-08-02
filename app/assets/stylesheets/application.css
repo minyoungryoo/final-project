@@ -11,5 +11,16 @@
  * It is generally better to create a new file per style scope.
  *
  *= require_tree .
+ *= require_style
  *= require_self
  */
+
+
+ .form-bottom {
+	background-color: lightcoral;
+}
+
+.form-control {
+	border: 3px solid #ddd !important;
+	height: 50px !important;
+}

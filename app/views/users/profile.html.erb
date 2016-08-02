@@ -1,14 +1,35 @@
-<% if current_user.role == "admin" %>
-	<h2>Profile for <%= @user.name %></h2>
-
+<% if current_user.role == "admin" || current_user.role == "doctor" %>
+	<div class="container">
+		<h2>Profile for <%= @user.name %></h2>
 	<div>
-	<%= link_to 'Check Health Record',"/users/#{current_user.id}/health_record"%>
+		<h3>Health Record:</h3>
 	</div>
 
+		  <table class="table table-hover">
+		    <thead>
+		      <tr>
+		        <th>Condition</th>
+		        <th>Diagnosis</th>
+		        <th>Description</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		    	<% @attr_arr.each_with_index do |attribute, index| %>
+		      <tr>
+		        <td><%=@condition_name[index]%> (<%= attribute %>)</td>
+		        <td><%= @data_arr[index]%></td>
+		        <td>N/A</td>
+		      </tr>
+		      	<% end %>
+		    </tbody>
+		  </table>
+		</div>
+
 <% elsif current_user %>
-	<p>Choose desired health record</p>
+
+	<p>What can I do to improve my condition?</p>
 	<ul>
-	<li><%= link_to 'Stroke',"/users/#{current_user.id}/files/#{@file_id}"%></li>
+	<li>Disease type: <%= link_to 'Stroke',"/users/#{current_user.id}/files/#{@file_id}"%></li>
 	</ul>
 	<p></p>
 
