@@ -97,7 +97,7 @@ $(document).on("turbolinks:load", function() {
 			    ctx.restore();
 			    var fontSize = (height / 150).toFixed(2);
 			    ctx.font = fontSize + "em sans-serif";
-			    ctx.textBaseline = "middle";
+			    ctx.textBaseline = "top";
 
 			    var text = `$${final_price}.00`,
 			        textX = Math.round((width - ctx.measureText(text).width) / 2),
@@ -155,7 +155,7 @@ $(document).on("turbolinks:load", function() {
 			    ctx.restore();
 			    var fontSize = (height / 150).toFixed(2);
 			    ctx.font = fontSize + "em sans-serif";
-			    ctx.textBaseline = "middle";
+			    ctx.textBaseline = "top";
 
 			    var text = `$${final_price2}.00`,
 			        textX = Math.round((width - ctx.measureText(text).width) / 2),
@@ -186,36 +186,9 @@ $(document).on("turbolinks:load", function() {
 		});
 
 		function initialize_data(response){
-		var contentA = "";
-		var content_label = ["Varying Dosages of Hep/Asp", "Heparin", "Aspirin", "Followup to treatment", "Subcutaneous Heparin", 
-		"Antiplatelet Drug", "Intravenous Heparin", "Other Anticoagulants", "Calcium Antagonists", "Glycerol or manitol", "Steroids", 
-		"Haemodilution", "Carotid Surgery", "Thrombolysis", "Medication Taken at 6-months Followup"];
-
 // 16-18, 38-49
-
-		for(var i=0; i<=14; i++){
-			if (i<=2){
-			contentA += `<input type="checkbox" data-patient-id=${patient_id} class="searchType" data-searchtype="A" name=${content_label[i]} data-index=${i} data-id=${i+16}>${content_label[i]}`;
-			}else{
-			contentA += `<input type="checkbox" data-patient-id=${patient_id} class="searchType" data-searchtype="A" name=${content_label[i]} data-index=${i} data-id=${i+35}>${content_label[i]}`;
-			};
-		};
-
-		$('.check_listA').html(contentA)
-
-		var contentB = "";
-		for(var i=0; i<=14; i++){
-			if (i<=2){
-			contentB += `<input type="checkbox" data-patient-id=${patient_id} class="searchType" data-searchtype="B" name=${content_label[i]} data-index=${i} data-id=${i+16}>${content_label[i]}`;
-			}else{
-			contentB += `<input type="checkbox" data-patient-id=${patient_id} class="searchType" data-searchtype="B" name=${content_label[i]} data-index=${i} data-id=${i+35}>${content_label[i]}`;
-			};
-		};
-
-		$('.check_listB').html(contentB)
-
-		var num_id_colA = [];
-		var num_id_colB = [];
+			var num_id_colA = [];
+			var num_id_colB = [];
 		$('.searchType').click(function(event) {
 			var file_id = $(".js-chart-container").data("id");
 			var num_id = $(event.currentTarget).data("id");

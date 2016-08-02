@@ -2,16 +2,32 @@
 
 <h2>Possible Actions</h2>
 <h3>Action A:</h3>
-<div class="check_listA"></div>
+<div class="check_listA">
+	<% @content_label.each_with_index do |name, i| %>
+		<% if i<=2 %>
+		<input type="checkbox" data-patient-id="<%= params[:id]%>" class="searchType" data-searchtype="A" name="<%=name%>" data-index="<%=i%>" data-id="<%=i+16%>"> <%=name%>
+		<% else %>
+		<input type="checkbox" data-patient-id="<%= params[:id]%>" class="searchType" data-searchtype="A" name= "<%=name%>" data-index="<%=i%>" data-id="<%=i+35%>"> <%=name%>
+		<% end %>
+	<% end %>
 
-<h3>Action A:</h3>
-<div class="js-doughnut-container" data-id="<%= params[:files_id] %>"></div>
+</div>
+
+<div class="js-doughnut-container" data-id=""<%= params[:files_id] %>"></div>
+
+<div class="js-doughnut-container2" data-id=""<%= params[:files_id] %>"></div>
 
 <h3>Action B:</h3>
-<div class="js-doughnut-container2" data-id="<%= params[:files_id] %>"></div>
+<div class="check_listB">
+	<% @content_label.each_with_index do |name, i| %>
+		<% if i<=2 %>
+			<input type="checkbox" data-patient-id="<%= params[:id]%>" class="searchType" data-searchtype="B" name="<%=name%>" data-index="<%=i%>" data-id="<%=i+16%>"> <%=name%>
+		<% else %>
+			<input type="checkbox" data-patient-id="<%= params[:id]%>" class="searchType" data-searchtype="B" name="<%=name%>" data-index="<%=i%>" data-id="<%=i+35%>"> <%=name%>
+		<% end %>
+	<% end %>
 
-<h3>Action B:</h3>
-<div class="check_listB"></div>
+</div>
 
 <div class="js-chart-container" data-patient-id="<%= params[:id]%>" data-id="<%= @file_id %>"></div>
 
