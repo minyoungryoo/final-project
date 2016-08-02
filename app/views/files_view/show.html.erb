@@ -13,9 +13,9 @@
 
 </div>
 
-<div class="js-doughnut-container" data-id=""<%= params[:files_id] %>"></div>
+<div class="js-doughnut-container" data-id="<%= params[:files_id] %>"></div>
 
-<div class="js-doughnut-container2" data-id=""<%= params[:files_id] %>"></div>
+<div class="js-doughnut-container2" data-id="<%= params[:files_id] %>"></div>
 
 <h3>Action B:</h3>
 <div class="check_listB">
@@ -33,7 +33,7 @@
 
 <div class="js-med-chart-container" data-id="<%= params[:files_id] %>"></div>
 
-<%= @disease_name %>
+
 
 <div id="myModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
@@ -42,7 +42,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Death</h4>
+        <h4 class="modal-title"><%= @disease_name %>Death</h4>
       </div>
       <div class="modal-body">
         <p>Some text in the modal.</p>

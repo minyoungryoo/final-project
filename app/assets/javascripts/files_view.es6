@@ -255,7 +255,7 @@ $(document).on("turbolinks:load", function() {
 		// 19-25, 30-37
 
 		var id = $('.js-med-chart-container').data("id");
-		$('.js-med-chart-container').html(`<canvas id="myMedChart" data-id="${id}" width="300" height="200"></canvas>`);
+		$('.js-med-chart-container').html(`<canvas id="myMedChart" data-id="${id}" style="width: 300px; height: 200px;"></canvas>`);
 
 		var ctx = document.getElementById("myMedChart");
 
