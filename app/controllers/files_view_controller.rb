@@ -10,8 +10,10 @@ class FilesViewController < ApplicationController
 
 		@disease_name = session[:disease_name]
 
-		puts "Disease name~~~~~~~~~~~~~~~~~~~~~"
-		p @disease_name
+		@patient_id = params[:patient_id]
+
+		puts "params~~~~~~~~~~~~~~~~~~~~~"
+		p @patient_id
 		puts "End ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 
 		@content_label = ["Varying Dosages of Hep/Asp", "Heparin", "Aspirin", "Followup to treatment", "Subcutaneous Heparin", 

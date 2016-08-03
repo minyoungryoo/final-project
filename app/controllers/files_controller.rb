@@ -30,6 +30,10 @@ class FilesController < ApplicationController
 		index_arr = params[:basic_index]
 		desc_arr = params[:basic_diag_desc]
 
+		puts "Patient ID *****************************"
+		p patient_id
+		puts "Patient ID *****************************"
+
 
 		if patient_id != nil && (FilesAnalysis.find_by(patient_id: patient_id))
 			session[:data_id] = FilesAnalysis.find_by(patient_id: patient_id).id
@@ -55,6 +59,13 @@ class FilesController < ApplicationController
 		col_numA = params[:num_idA]
 		col_numB = params[:num_idB]
 		patient_id = params[:patient_id]
+
+		puts "Patient ID *****************"
+		p patient_id
+
+		puts "PARAMS"
+		p params
+		puts "Patient ID *****************"
 
 		attr_arr = FilesAnalysis.find_by(patient_id: patient_id).patient_attr_data
 		data_arr = FilesAnalysis.find_by(patient_id: patient_id).patient_data

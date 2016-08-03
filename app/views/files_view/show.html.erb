@@ -5,9 +5,9 @@
 <div class="check_listA">
 	<% @content_label.each_with_index do |name, i| %>
 		<% if i<=2 %>
-		<input type="checkbox" data-patient-id="<%= params[:id]%>" class="searchType" data-searchtype="A" name="<%=name%>" data-index="<%=i%>" data-id="<%=i+16%>"> <%=name%>
+		<input type="checkbox" data-patient-id="<%= @patient_id %>" class="searchType" data-searchtype="A" name="<%=name%>" data-index="<%=i%>" data-id="<%=i+16%>"> <%=name%>
 		<% else %>
-		<input type="checkbox" data-patient-id="<%= params[:id]%>" class="searchType" data-searchtype="A" name= "<%=name%>" data-index="<%=i%>" data-id="<%=i+35%>"> <%=name%>
+		<input type="checkbox" data-patient-id="<%= @patient_id %>" class="searchType" data-searchtype="A" name= "<%=name%>" data-index="<%=i%>" data-id="<%=i+35%>"> <%=name%>
 		<% end %>
 	<% end %>
 
@@ -21,15 +21,15 @@
 <div class="check_listB">
 	<% @content_label.each_with_index do |name, i| %>
 		<% if i<=2 %>
-			<input type="checkbox" data-patient-id="<%= params[:id]%>" class="searchType" data-searchtype="B" name="<%=name%>" data-index="<%=i%>" data-id="<%=i+16%>"> <%=name%>
+			<input type="checkbox" data-patient-id="<%= @patient_id %>" class="searchType" data-searchtype="B" name="<%=name%>" data-index="<%=i%>" data-id="<%=i+16%>"> <%=name%>
 		<% else %>
-			<input type="checkbox" data-patient-id="<%= params[:id]%>" class="searchType" data-searchtype="B" name="<%=name%>" data-index="<%=i%>" data-id="<%=i+35%>"> <%=name%>
+			<input type="checkbox" data-patient-id="<%= @patient_id %>" class="searchType" data-searchtype="B" name="<%=name%>" data-index="<%=i%>" data-id="<%=i+35%>"> <%=name%>
 		<% end %>
 	<% end %>
 
 </div>
 
-<div class="js-chart-container" data-patient-id="<%= params[:id]%>" data-id="<%= @file_id %>"></div>
+<div class="js-chart-container" data-patient-id="<%= @patient_id %>" data-id="<%= @file_id %>"></div>
 
 <div class="js-med-chart-container" data-id="<%= params[:files_id] %>"></div>
 

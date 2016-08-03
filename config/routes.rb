@@ -27,7 +27,7 @@ Rails.application.routes.draw do
 
 	get '/users/:id/files', to: 'users#profile'
 
-	get '/users/:id/files/:files_id', to: 'files_view#show'
+	get '/users/:id/files/:patient_id', to: 'files_view#show'
 
 	get '/users/:id/health_record', to: 'users#health_record'
 

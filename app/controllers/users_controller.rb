@@ -16,9 +16,9 @@ class UsersController < ApplicationController
 
 	def profile
 		@user = User.find(params[:id])
-		patient_id = @user.id
-		patient = FilesAnalysis.find_by(patient_id: patient_id)
-		
+		@patient_id = @user.id
+		patient = FilesAnalysis.find_by(patient_id: @patient_id)
+
 		@attr_arr = patient.patient_attr_data
 		@data_arr = patient.patient_data
 		@desc_arr = patient.patient_desc

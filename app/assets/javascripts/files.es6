@@ -31,7 +31,7 @@ $(document).on("turbolinks:load", function() {
 			var attr = $(event.currentTarget).data("attr-name");
 			var index = $(event.currentTarget).data("index");
 			var desc_val = $(event.currentTarget).data("diag-desc");
-			var patient_id = $("select option:selected").data("id");
+			var patient_id = $(".selectpicker option:selected").data("id");
 
 			attr_arr[parseInt(index)] = attr;
 			index_arr[parseInt(index)] = val;
