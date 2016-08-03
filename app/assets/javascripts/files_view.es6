@@ -33,7 +33,6 @@ $(document).on("turbolinks:load", function() {
 		var sample_color = ["#BC41EF", "#BB61F3", "#802D7C", "#ECF38B", "#D676D1", "#2F1081", "#AA208A", "#FF6384", "#36A2EB", "#FFCE56", "#BC41EF", "#FA8072", "#B0C627", "#27AEC6", "#C6A727"];
 
 		if (type === "A") {
-			// return;
 		response_label.push(content_label[num_index]);
 		data_arr.push(finan_data_arr[num_index]);
 		color_arr.push(sample_color[num_index]);
@@ -195,41 +194,49 @@ $(document).on("turbolinks:load", function() {
 			var num_index = $(event.currentTarget).data("index");
 			var type = $(event.currentTarget).data("searchtype");
 			var patient_id = $(event.currentTarget).data("patient-id");
+			var index;
 
 			var data = { patient_id: patient_id };
-
-			console.log(type);
-			if(type == "A"){
-				num_id_colA.push(num_id);
-				data.num_idA = num_id_colA;
-			}else if(type == "B"){
-				num_id_colB.push(num_id);
-				data.num_idB = num_id_colB;
-			}
-
-			$.ajax({
-				type: "GET",
-				data: data,
-				url: `/api/files/${file_id}`,
-				success: function(response){
-
-					var index = typeToIndex[type];
-					data_cache[index] = response;
-
-					visualize_data(data_cache); 
-					financial_data(num_index, type);
-
+			if ($(this).is(':checked')) {
+				if(type == "A"){
+					num_id_colA.push(num_id);
+					data.num_idA = num_id_colA;
+					console.log(num_id_colA);
+				}else if(type == "B"){
+					num_id_colB.push(num_id);
+					data.num_idB = num_id_colB;
 				}
-			});
 
-		 });
-
-	
-		}	
-					if ($('.searchType').is(':checked')) {
-						console.log("checked");
+				} else {
+					if(type == "A"){
+						index = num_id_colA.indexOf(num_id);
+						console.log(index);
+						num_id_colA.splice(index, 1);
+					console.log(num_id_colA);
+						data.num_idA = num_id_colA;
+					}else if(type == "B"){
+						index = num_id_colB.indexOf(num_id);
+						num_id_colB.splice(index, 1);
+						data.num_idB = num_id_colB;
 					}
+				}
 
+				$.ajax({
+					type: "GET",
+					data: data,
+					url: `/api/files/${file_id}`,
+					success: function(response){
+
+						var index = typeToIndex[type];
+						data_cache[index] = response;
+
+						visualize_data(data_cache); 
+						financial_data(num_index, type);
+
+					}
+				});
+			 });
+		}
 
 	}
 	
