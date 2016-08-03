@@ -25,18 +25,25 @@ $(document).on("turbolinks:load", function() {
 			B: 1
 		}
 
-	function financial_data(num_index, type){
-
-
+	function financial_data(num_index, type, check){
 		var content_label = ["Varying Dosages of Hep/Asp", "Heparin", "Aspirin", "Followup to treatment", "Subcutaneous Heparin", "Antiplatelet Drug", "Intravenous Heparin", "Other Anticoagulants", "Calcium Antagonists", "Glycerol or manitol", "Steroids", "Haemodilution", "Carotid Surgery", "Thrombolysis", "Medication Taken at 6-months Followup"];
 		var finan_data_arr = [500, 640, 383, 200, 780, 320, 107, 372, 6000, 3000, 10, 68, 15000, 55, 200];
 		var sample_color = ["#BC41EF", "#BB61F3", "#802D7C", "#ECF38B", "#D676D1", "#2F1081", "#AA208A", "#FF6384", "#36A2EB", "#FFCE56", "#BC41EF", "#FA8072", "#B0C627", "#27AEC6", "#C6A727"];
+		var i;
 
 		if (type === "A") {
+			if(check == 1){
 		response_label.push(content_label[num_index]);
 		data_arr.push(finan_data_arr[num_index]);
 		color_arr.push(sample_color[num_index]);
 		final_price += finan_data_arr[num_index];
+			} else {
+		i = response_label.indexOf(content_label[num_index]);
+		response_label.splice(i, 1);
+		data_arr.splice(i, 1);
+		color_arr.splice(i, 1);
+		final_price -= finan_data_arr[num_index];			
+			}
 
 			var data = {
 		    labels: response_label,
@@ -195,6 +202,7 @@ $(document).on("turbolinks:load", function() {
 			var type = $(event.currentTarget).data("searchtype");
 			var patient_id = $(event.currentTarget).data("patient-id");
 			var index;
+			var check = 0;
 
 			var data = { patient_id: patient_id };
 			if ($(this).is(':checked')) {
@@ -207,18 +215,19 @@ $(document).on("turbolinks:load", function() {
 					data.num_idB = num_id_colB;
 				}
 
+				check = 1;
+
 				} else {
 					if(type == "A"){
 						index = num_id_colA.indexOf(num_id);
-						console.log(index);
 						num_id_colA.splice(index, 1);
-					console.log(num_id_colA);
 						data.num_idA = num_id_colA;
 					}else if(type == "B"){
 						index = num_id_colB.indexOf(num_id);
 						num_id_colB.splice(index, 1);
 						data.num_idB = num_id_colB;
 					}
+				check = 0;
 				}
 
 				$.ajax({
@@ -231,7 +240,7 @@ $(document).on("turbolinks:load", function() {
 						data_cache[index] = response;
 
 						visualize_data(data_cache); 
-						financial_data(num_index, type);
+						financial_data(num_index, type, check);
 
 					}
 				});
