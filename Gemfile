@@ -15,7 +15,7 @@ gem 'liblinear-ruby'
 gem 'decisiontree'
 
 gem "paperclip", "~> 5.0.0"
-
+gem 'aws-sdk', '~> 2.3'
 # gem 'chartjs-ror'
 
 gem 'devise'
