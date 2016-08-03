@@ -266,18 +266,30 @@ $(document).on("turbolinks:load", function() {
 		var theChart;
 			var data_arrayA = response[0][1];
 			var error_arrayA = response[0][2];
+				if(data_arrayA != 0){
+					data_arrayA = data_arrayA.map(function(x) { return x * 100; });
+					error_arrayA = error_arrayA.map(function(x) { return x * 100; });
+				}
 			var arr_lengthA = data_arrayA.length;
 			var color_arrayA = Array(arr_lengthA).fill('rgba(255, 99, 132, 0.2)');
 			if(arr_lengthA > 0){
 				color_arrayA[arr_lengthA-1] = "#FF0000";
+				data_arrayA[arr_lengthA-1] = data_arrayA[arr_lengthA-1]/4;
+				error_arrayA[arr_lengthA-1] = error_arrayA[arr_lengthA-1]/4;
 			}
 
 			var data_arrayB = response[1][1];
 			var error_arrayB = response[1][2];
+				if(data_arrayB != 0){
+					data_arrayB = data_arrayB.map(function(x) { return x * 100; });
+					error_arrayB = error_arrayB.map(function(x) { return x * 100; });
+				}
 			var arr_lengthB = data_arrayB.length;
 			var color_arrayB = Array(arr_lengthB).fill('#AFEEEE');
 			if(arr_lengthB > 0){
 				color_arrayB[arr_lengthB-1] = "#0000FF";
+				data_arrayB[arr_lengthB-1] = data_arrayB[arr_lengthB-1]/4;
+				error_arrayB[arr_lengthB-1] = error_arrayB[arr_lengthB-1]/4;
 			}
 
 		var data_label = ["Major Non-cerebral Hemorrhage", "Other Side Effect", "Recurrent Ischemic Stroke", "Recurrent hemorrhagic Stroke", "Recurrent unknown Stroke", "Pulmonary embolism", "Death", "Indicator for hemorrhagic stroke", "Indicator for ischemic stroke","Indicator for indeterminate stroke","Indicator for hemorrhagic transform","Indicator for pulmonary embolism","Indicator for deep vein thrombosis","Indicator for major non-cerebral bleed","Indicator for any stroke", "Final Condition"];
@@ -344,16 +356,24 @@ $(document).on("turbolinks:load", function() {
 		        scales: {
 	        	     xAxes: [
 				                {
-				                    // stacked: true
+				                    // stacked: true,
+	           //                scaleLabel: {
+						      //   display: true,
+						      //   labelString: 'probability'
+						      // }
 				                }
 				            ],
 		            yAxes: [{
 		            	// stacked: true,
+	            	      scaleLabel: {
+						        display: true,
+						        labelString: 'Probability of Occurrence (%)'
+						      },
 		                ticks: {
 		                    beginAtZero:true,
                             max: max_val*1.2,
 		                    min: 0,
-		                    stepSize: 0.5
+		                    stepSize: 20
 		                }
 		            }]
 		        },
