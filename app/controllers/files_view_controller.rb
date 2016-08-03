@@ -12,10 +12,6 @@ class FilesViewController < ApplicationController
 
 		@patient_id = params[:patient_id]
 
-		puts "params~~~~~~~~~~~~~~~~~~~~~"
-		p @patient_id
-		puts "End ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-
 		@content_label = ["Varying Dosages of Hep/Asp", "Heparin", "Aspirin", "Followup to treatment", "Subcutaneous Heparin", 
 		"Antiplatelet Drug", "Intravenous Heparin", "Other Anticoagulants", "Calcium Antagonists", "Glycerol or manitol", "Steroids", 
 		"Haemodilution", "Carotid Surgery", "Thrombolysis", "Medication Taken at 6-months Followup"];
