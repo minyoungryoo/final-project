@@ -18,8 +18,6 @@ class FilesAnalysis < ApplicationRecord
 		def runAnalysis(full_training_array, col_nums, basic_attribute_array, basic_patient_condition)
 			full_attribute_array = full_training_array[0]
 			full_attribute_array = full_attribute_array[0..49]
-			
-
 
 			full_training_array = full_training_array[1..119]
 			# full_training_array.shift
