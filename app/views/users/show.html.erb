@@ -23,12 +23,23 @@
 	</div>
 
 	<% else %>
+	<div>
 	<%= link_to 'Check my Health Record',"/users/#{current_user.id}/files"%>
+	</div>	
+
+	<div>
+	<%= link_to 'Edit Profile',"/users/#{current_user.id}/files"%>
+	</div>
+
 	<% end %>
 
 	<div>
 	<%= link_to 'Log out', destroy_user_session_path, method: 'delete' %>
 	</div>    
+
+	<div class="prof_img">
+	<img src="http://static1.squarespace.com/static/53c80813e4b09390905d8f2f/t/5413039ce4b0b7995ef89abd/1410532258946/Health+Analytics.jpg?format=1500w" alt="medical analytics image">
+	</div>
 
 <% else %>
 	<h2>Nobody logged in</h2>
