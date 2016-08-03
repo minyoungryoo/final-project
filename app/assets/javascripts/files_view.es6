@@ -224,11 +224,11 @@ $(document).on("turbolinks:load", function() {
 
 		 });
 
-					if ($('input.checkbox_check').is(':checked')) {
-				console.log("checked");
-					}
 	
 		}	
+					if ($('.searchType').is(':checked')) {
+						console.log("checked");
+					}
 
 
 	}
@@ -347,12 +347,9 @@ $(document).on("turbolinks:load", function() {
 	    var disease_name = activeElement[0]._xScale.ticks[i];
 		$.ajax({
 			type: "GET",
-			url: `/files/${file_id}`,
-			data: {disease_name: disease_name},
-			// success: initialize_data
+			url: `/files/2`,
+			data: {disease_name: disease_name}
 		});
-	    // ajax 
-	    // /files/:id
 	    $('#myModal').modal('show');
 		}
 
