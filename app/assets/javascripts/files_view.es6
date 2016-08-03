@@ -45,7 +45,7 @@ $(document).on("turbolinks:load", function() {
 		final_price -= finan_data_arr[num_index];			
 			}
 
-			var data = {
+			var dataA = {
 		    labels: response_label,
 		    datasets: [
 		        {
@@ -60,7 +60,7 @@ $(document).on("turbolinks:load", function() {
 		var ctx = document.getElementById("myPieChart");
 		var myPiechart = new Chart(ctx, {
 		    type: 'doughnut',
-		    data: data,
+		    data: dataA,
 		    options: {
 		    	title: {
                        display: true,
@@ -116,10 +116,18 @@ $(document).on("turbolinks:load", function() {
 		});
 
 	}else if(type === "B"){
+			if(check == 1){
 		response_label2.push(content_label[num_index]);
 		data_arr2.push(finan_data_arr[num_index]);
 		color_arr2.push(sample_color[num_index]);
 		final_price2 += finan_data_arr[num_index];
+			} else {
+		i = response_label2.indexOf(content_label[num_index]);
+		response_label2.splice(i, 1);
+		data_arr2.splice(i, 1);
+		color_arr2.splice(i, 1);
+		final_price2 -= finan_data_arr[num_index];			
+			}
 
 			var data = {
 		    labels: response_label2,
@@ -352,7 +360,6 @@ $(document).on("turbolinks:load", function() {
 				onClick: handleClick
 		    }
 		});	
-
 
 
 
