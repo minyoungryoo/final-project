@@ -272,7 +272,7 @@ $(document).on("turbolinks:load", function() {
 					error_arrayA = error_arrayA.map(function(x) { return x * 100; });
 				}
 			var arr_lengthA = data_arrayA.length;
-			var color_arrayA = Array(arr_lengthA).fill('#FE4CF4');
+			var color_arrayA = Array(arr_lengthA).fill('#FF7FF7');
 			if(arr_lengthA > 0){
 				color_arrayA[arr_lengthA-1] = "#FF0000";
 				data_arrayA[arr_lengthA-1] = data_arrayA[arr_lengthA-1]/4;
@@ -286,7 +286,7 @@ $(document).on("turbolinks:load", function() {
 					error_arrayB = error_arrayB.map(function(x) { return x * 100; });
 				}
 			var arr_lengthB = data_arrayB.length;
-			var color_arrayB = Array(arr_lengthB).fill('#AFEEEE');
+			var color_arrayB = Array(arr_lengthB).fill('#7FFFF9');
 			if(arr_lengthB > 0){
 				color_arrayB[arr_lengthB-1] = "#0000FF";
 				data_arrayB[arr_lengthB-1] = data_arrayB[arr_lengthB-1]/4;
