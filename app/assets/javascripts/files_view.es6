@@ -272,7 +272,7 @@ $(document).on("turbolinks:load", function() {
 					error_arrayA = error_arrayA.map(function(x) { return x * 100; });
 				}
 			var arr_lengthA = data_arrayA.length;
-			var color_arrayA = Array(arr_lengthA).fill('rgba(255, 99, 132, 0.2)');
+			var color_arrayA = Array(arr_lengthA).fill('#FE4CF4');
 			if(arr_lengthA > 0){
 				color_arrayA[arr_lengthA-1] = "#FF0000";
 				data_arrayA[arr_lengthA-1] = data_arrayA[arr_lengthA-1]/4;
