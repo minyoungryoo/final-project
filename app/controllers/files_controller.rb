@@ -49,7 +49,7 @@ class FilesController < ApplicationController
 
 	def show
 		file = ProcessFile.find(params[:id])
-		array = File.read(file.csv_file.path)
+		array = file.csv_file_instance
 		readable_array = JSON.parse(array)
 		col_numA = params[:num_idA]
 		col_numB = params[:num_idB]
