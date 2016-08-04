@@ -191,6 +191,7 @@ $(document).on("turbolinks:load", function() {
 
 		var file_id = $(".js-chart-container").data("id");
 		var patient_id = $(".js-chart-container").data("patient-id");
+		console.log(patient_id);
 
 		$.ajax({
 			type: "GET",

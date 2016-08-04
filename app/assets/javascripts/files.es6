@@ -8,7 +8,7 @@ $(document).on("turbolinks:load", function() {
 		var diag_desc = [];
 
 		// var file_id = $(".js-chart-container").data("id");
-		var file_id = 3;
+		var file_id = 2;
 
 
 		var user_id = $();
