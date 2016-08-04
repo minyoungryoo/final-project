@@ -16,7 +16,7 @@ class FilesController < ApplicationController
 	  # file = JSON.generate(array)
 
 	  if file.save
-		  redirect_to "/files/#{file.id}"
+		  redirect_to "/users"
 	  else
 	  	@file = file
 	  	flash.now[:alert] = "Error uploading file"
@@ -29,11 +29,6 @@ class FilesController < ApplicationController
 		attr_arr = params[:basic_attr]
 		index_arr = params[:basic_index]
 		desc_arr = params[:basic_diag_desc]
-
-		puts "Patient ID *****************************"
-		p patient_id
-		puts "Patient ID *****************************"
-
 
 		if patient_id != nil && (FilesAnalysis.find_by(patient_id: patient_id))
 			session[:data_id] = FilesAnalysis.find_by(patient_id: patient_id).id

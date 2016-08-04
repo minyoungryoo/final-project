@@ -12,7 +12,13 @@
 <% end %>
 
 <%= form_for :process_file, url: "/api/files", multipart: true do |f| %>
-  <%= f.file_field :csv_file %>
-  <!-- name="process_file[csv_file]" -->
-  <%= f.button "Submit", :class => 'file_button' %>
+	<div class="form-group field">
+	  <%= f.file_field :csv_file, :class => 'upload_file_btn' %>
+	  <!-- name="process_file[csv_file]" -->
+	  <%= f.button "Submit", :class => 'file_button' %>
+	</div>
 <% end %>
+
+	<div>
+	<%= link_to 'Log out', destroy_user_session_path, method: 'delete' %>
+	</div> 
