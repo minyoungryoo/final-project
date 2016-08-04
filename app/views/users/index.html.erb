@@ -1,15 +1,13 @@
 <h1>List of Users</h1>
 <ul>
-<% @all_users.each do |user| %>
+<% @all_users.each_with_index do |user, index| %>
 	<li>
 		<h2>
 		<%= user.name %> 
 		</h2>
 
 		<p>
-		<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal2">
-		  Quick Summary
-		</button>
+		<%= link_to "Quick Summary", "/users/#{user.id}/profile" %>
 		</p>
 
 		<p>
@@ -21,12 +19,8 @@
 		</p>
 	</li>
 
-<% end %>
-</ul>
-
-
-<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
+<div class="modal fade" id="<%=index%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" id="<%=index%>" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -42,5 +36,9 @@
     </div>
   </div>
 </div>
+<% end %>
+</ul>
+
+
 
 
