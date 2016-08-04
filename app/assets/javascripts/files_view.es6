@@ -64,6 +64,7 @@ $(document).on("turbolinks:load", function() {
 		    options: {
 		    	title: {
                        display: true,
+                       fontSize: 16,
                        text: 'Action A'
                            },
 		    	maintainAspectRatio: false,
@@ -148,6 +149,7 @@ $(document).on("turbolinks:load", function() {
 		    options: {
 		    	title: {
                       display: true,
+                      fontSize: 16,
                       text: 'Action B'
                          },
 		    	maintainAspectRatio: false,
@@ -352,6 +354,7 @@ $(document).on("turbolinks:load", function() {
 		    options: {
 		    	        title: {
 			            display: true,
+			            fontSize: 20,
 			            text: 'Side Effects vs. Final Condition'
 				        },
 		        scales: {
@@ -368,11 +371,12 @@ $(document).on("turbolinks:load", function() {
 		            	// stacked: true,
 	            	      scaleLabel: {
 						        display: true,
-						        labelString: 'Probability of Occurrence (%)'
+						        labelString: 'Probability of Occurrence (%)',
+						        fontSize: 16
 						      },
 		                ticks: {
 		                    beginAtZero:true,
-                            max: max_val*1.2,
+                            max: max_val*1.3,
 		                    min: 0,
 		                    stepSize: 20
 		                }

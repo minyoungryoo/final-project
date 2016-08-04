@@ -2,14 +2,6 @@ require 'csv'
 
 class FilesController < ApplicationController
 
-	# def create
-	# 	array = CSV.read(params[:csv_file].path)
-	# 	result = FilesAnalysis.new.doStuff(array)
-
-	# 	render json: result
-	# 	# redirect_to "/files"
-	# end
-
 	def create
 	  file = ProcessFile.new( process_file_params )
 	  # array = CSV.read(old_file.csv_file.path)
@@ -37,9 +29,6 @@ class FilesController < ApplicationController
 			session[:data_id] = patient_data.id
 		end
 
-		puts "length"
-		p index_arr.length
-		puts "End"
 
 		if index_arr && index_arr.length == 15	
 			data_id = session[:data_id]
@@ -55,13 +44,6 @@ class FilesController < ApplicationController
 		col_numB = params[:num_idB]
 		patient_id = params[:patient_id]
 
-		puts "Patient ID *****************"
-		p patient_id
-
-		puts "PARAMS"
-		p params
-		puts "Patient ID *****************"
-
 		attr_arr = FilesAnalysis.find_by(patient_id: patient_id).patient_attr_data
 		data_arr = FilesAnalysis.find_by(patient_id: patient_id).patient_data
 
@@ -69,9 +51,9 @@ class FilesController < ApplicationController
 			result = FilesAnalysis.new.doStuff(readable_array, col_numA, col_numB, attr_arr, data_arr)
 		end
 		# test_result = result
-		# 	puts "\n\n~~~~~~~~~~~~~~~~~~~~~~~~~hiiiii~~~~~~~~~~~~~~~~~~~~~~~"
-		# 	p test_result
-		# 	puts "\n\n"
+			# puts "\n\n~~~~~~~~~~~~~~~~~~~~~~~~~hiiiii~~~~~~~~~~~~~~~~~~~~~~~"
+			# p result
+			# puts "\n\n"
 		# puts "Session test"
 		# p col_numA
 		# p col_numB

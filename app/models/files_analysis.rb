@@ -4,6 +4,17 @@ class FilesAnalysis < ApplicationRecord
 	def doStuff(full_training_array, col_numsA, col_numsB, basic_attribute_array, basic_patient_condition)
 		# 19-25, 30-37, 50
 			type = nil
+			puts "Full training array: "
+			p full_training_array.class
+			puts "col nums A:"
+			p col_numsA
+			puts "col_numsB: "
+			p col_numsB
+			puts "basic attr array:"
+			p basic_attribute_array
+			puts "basic patient condition:"
+			p basic_patient_condition
+			puts "END~~~~~~~~~~~~~~~~~~~~~~~~~~"
 
 			if col_numsA != nil
 				result_arr_A = runAnalysis(full_training_array, col_numsA, basic_attribute_array, basic_patient_condition)
@@ -14,6 +25,7 @@ class FilesAnalysis < ApplicationRecord
 				result_arr_B = runAnalysis(full_training_array, col_numsB, basic_attribute_array, basic_patient_condition)
 				type = "B"
 			end
+
 
 		def runAnalysis(full_training_array, col_nums, basic_attribute_array, basic_patient_condition)
 			full_attribute_array = full_training_array[0]
@@ -45,7 +57,7 @@ class FilesAnalysis < ApplicationRecord
 			full_decision_arr = []
 			mean_result_arr = []
 			std_result_arr = []
-			parameter = { solver_type: Liblinear::L1R_LR  }
+			parameter = { solver_type: Liblinear::L2R_LR }
 			fold = 3
 			n = -1
 			for i in 19..50
